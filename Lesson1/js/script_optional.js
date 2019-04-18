@@ -1,4 +1,4 @@
-'use strinct';
+'use strict';
 
 let num = 33721;
 console.log(`Number is ${num}`);

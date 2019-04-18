@@ -1,4 +1,4 @@
-'use strinct';
+'use strict';
 
 // Get user data
 let money = prompt("Ваш бюджет за месяц?", "");
