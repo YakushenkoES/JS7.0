@@ -24,7 +24,7 @@ for (let i = 0; i < 2; i++)
 }
 
 // Check 'appData' object content
-console.log("Проверка содержания построенного объекта123123");
+console.log("Проверка содержания построенного объекта");
 console.log(appData);
 
 // 1 day budget
