@@ -1,43 +1,27 @@
-'use strict';
+'use strinct';
 
-let person = {
-  name: 'Jhon',
-  age: 25,
-  Married: true
+// Get user data
+let money = prompt("Ваш бюджет за месяц?", "");
+let sNow = new Date().toISOString().slice(0,10);
+let time = prompt("Введите дату в формате YYYY-MM-DD",sNow);
+
+// Create object, add time and money
+let appData = {
+  "money" : money,
+  "timeData" : time,
+  "expenses" : {},
+  "optionalExpenses" : {},
+  "income" : {},
+  "savings" : {}
 };
 
+// Expenses
+for (let i = 0; i < 2; i++)
+{
+  let expense = prompt("Введите обязательную статью расходов в этом месяце", "");
+  let expMoney = prompt("Во сколько обойдется?", "");
+  appData.expenses[expense] = expMoney;
+}
 
-console.log(person.name);
-console.log(person["age"]);
-
-let arr = ['plum.png', 'orange.jpg', 'apple.bmp'];
-
-console.log(arr[0]);
-
-//console.log("ss"+"xx");
-//console.log("4"+5);
-//console.log(5+"4");
-//
-//console.log(+"4"+5);
-//console.log(5+ +"4");
-//let ans = +prompt("Есть ли вам 18?", "Да");
-//console.log((ans));
-//console.log(typeof(ans));
-
-
-let incr = 10,
-    decr = 10;
-
-   
-    console.log(incr++);
-    console.log(decr--);
-
-
-    console.log("2"==2);
-    console.log("2"===2);
-
-    let isChecked = true;
-    let isClosed = false;
-
-    console.log(isChecked && isClosed);
-    console.log(isChecked || isClosed);
+// 1 day budget
+console.log(`Бюджет на 1 день ${appData.money / 30}`);
