@@ -34,4 +34,4 @@ while(temp >= 10 ** lastDigitsQty)
   temp=(temp-rem)/10;
 }
 let digitsLast2 = temp;
-console.log(`Last ${lastDigitsQty} digits of ${pow} is ${digitsLast2}`);
+console.log(`First ${lastDigitsQty} digits of ${pow} is ${digitsLast2}`);
