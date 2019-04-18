@@ -23,5 +23,9 @@ for (let i = 0; i < 2; i++)
   appData.expenses[expense] = expMoney;
 }
 
+// Check 'appData' object content
+console.log("Проверка содержания построенного объекта123123");
+console.log(appData);
+
 // 1 day budget
 console.log(`Бюджет на 1 день ${appData.money / 30}`);
