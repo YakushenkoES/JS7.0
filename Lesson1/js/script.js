@@ -12,7 +12,7 @@ let appData = {
   "expenses" : {},
   "optionalExpenses" : {},
   "income" : {},
-  "savings" : {}
+  "savings" : false
 };
 
 // Expenses
