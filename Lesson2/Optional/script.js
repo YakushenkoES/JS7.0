@@ -1,9 +1,10 @@
-
 'use strict';
 // Day of weeks_________________________________
 let week = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"];
 let todayIndex = new Date().getDay() - 1; // Day of week; -1 is convertion [sunday-saturday] to [monday - Sunday]
-
+if (todayIndex < 0) {
+  todayIndex = 6;
+}
 
 // Show days to display
 let elAns = document.getElementById("answer");
@@ -43,7 +44,7 @@ console.log('Log10 method');
 for (let i = 0; i < arr.length; i++) {
   let qtyDigits = Math.floor(Math.log10(arr[i]) + 1);
   let firstDigit = Math.floor(arr[i] / Math.pow(10, qtyDigits - 1));
-  if (firstDigit== 3 || firstDigit == 7) {
+  if (firstDigit == 3 || firstDigit == 7) {
     console.log(arr[i]);
   }
 }
