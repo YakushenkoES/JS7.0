@@ -16,15 +16,41 @@ for (let i = 0; i < week.length; i++) {
 
   // Set styles (add classes)
   elDay.classList.add("day");
-  if (i == todayIndex) {
+  let bWeekend = i >= 5;
+  let bToday = i == todayIndex;
+  if (bToday) {
     elDay.classList.add("today");
   }
-  if (i >= 5) {
+  if (bWeekend) {
     elDay.classList.add("weekend");
   }
 
   // Add day elemnt
   elAns.appendChild(elDay);
+
+
+  // To console output
+  // common format
+  let format = "font-family: Arial, Helvetica, sans-serif; font-size: 18px; padding-left: 5px; ";
+
+  // bold italic format
+  if (bWeekend) {
+    format += "font-weight: bold; ";
+  }
+  if (i == todayIndex) {
+    format += "font-style: italic;  background-color: rgb(137, 240, 240); ";
+  }
+
+  // left border
+  if (bWeekend) {
+    format += " border-left: solid red 4px;; ";
+  } else {
+    format += "border-left: solid gray 2px;";
+  }
+
+  // output
+  console.log("%c"+week[i], format);
+
 }
 
 // Numbers______________________
