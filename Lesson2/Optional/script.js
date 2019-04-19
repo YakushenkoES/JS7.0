@@ -1,3 +1,5 @@
+
+'use strict';
 // Day of weeks_________________________________
 let week = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"];
 let todayIndex = new Date().getDay() - 1; // Day of week; -1 is convertion [sunday-saturday] to [monday - Sunday]
