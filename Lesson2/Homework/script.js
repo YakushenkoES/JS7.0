@@ -16,25 +16,24 @@ let appData = {
 };
 
 // Expenses
-let qtyExpenses = 2; // Quantity of expenses
-let attemptsMaxQty = 5; // No more 5 attempts! To avoid infinite input cycle (if user constantly inputs wrong data)
 
 // Cycle using "while"
-// let i = 0, attempt = 0;
-// while(i < qtyExpenses && attempt < attemptsMaxQty){
-//   i++; attempt++;
+// let i = 0,;
+// while(i < qtyExpenses ){
+//   i++; 
 //     ...
 // }
 
 // Cycle using "do while"
-// let i = 0, attempt = 0;
+// let i = 0;
 // do{
-//   i++; attempt++;
+//   i++; 
 //     ...
 // }
-// while(i < qtyExpenses && attempt < attemptsMaxQty);
+// while(i < qtyExpenses );
 
-for (let i = 0, attempt = 0; i < qtyExpenses && attempt < attemptsMaxQty; i++, attempt++) {
+let qtyExpenses = 2; // Quantity of expenses
+for (let i = 0; i < qtyExpenses; i++) {
 
   // Enter data
   let exp = prompt("Введите обязательную статью расходов в этом месяце", "");
@@ -42,8 +41,8 @@ for (let i = 0, attempt = 0; i < qtyExpenses && attempt < attemptsMaxQty; i++, a
 
   // Is data valid?
   let isValid =
-    typeof (exp) === 'string' && typeof (exp) !== null && exp != '' && exp.length < 50 && // Check expense 
-    typeof (money) === 'string' && typeof (money) !== null && money != ''; // Check money 
+    typeof (exp) === 'string' && exp != '' && exp.length < 50 && // Check expense 
+    !Number.isNaN(parseFloat(money)) && isFinite(money); // Check money 
 
   // Data is NOT valid
   if (!isValid) {
@@ -53,10 +52,10 @@ for (let i = 0, attempt = 0; i < qtyExpenses && attempt < attemptsMaxQty; i++, a
   }
 
   // Data is valid
-  appData.expenses[exp] = money;
+  appData.expenses[exp] = +money;
   console.log("Data SAVED!");
 }
-
+console.log(appData);
 // 1 day budget
 appData.moneyPerDay = appData.budget / 30;
 console.log("Бюджет на 1 день:" + appData.moneyPerDay);
