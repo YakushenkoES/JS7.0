@@ -9,6 +9,8 @@ if (todayIndex < 0) {
 // Show days to display
 let elAns = document.getElementById("answer");
 for (let i = 0; i < week.length; i++) {
+
+  // HTML document output_____________
   // create day element
   let elDay = document.createElement("p");
   let content = document.createTextNode(week[i]);
@@ -25,11 +27,11 @@ for (let i = 0; i < week.length; i++) {
     elDay.classList.add("weekend");
   }
 
-  // Add day elemnt
+  // Add day element
   elAns.appendChild(elDay);
 
 
-  // To console output
+  // Console output______________
   // common format
   let format = "font-family: Arial, Helvetica, sans-serif; font-size: 18px; padding-left: 5px; ";
 
@@ -43,7 +45,7 @@ for (let i = 0; i < week.length; i++) {
 
   // left border
   if (bWeekend) {
-    format += " border-left: solid red 4px;; ";
+    format += " border-left: solid red 4px; ";
   } else {
     format += "border-left: solid gray 2px;";
   }
