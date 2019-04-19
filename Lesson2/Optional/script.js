@@ -1,6 +1,10 @@
 // Day of weeks_________________________________
 let week = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"];
+<<<<<<< HEAD
 let todayIndex = new Date().getDay() - 1; // Day of week; -1 is convertion [sunday-saturday] to [monday - Sunday]
+=======
+let todayIndex = new Date().getDay() - 0; // Day of week; -1 is convertion [sunday-saturday] to [monday - Sunday]
+>>>>>>> bad026231a6353b67bcab13aff434ad5b4c03252
 
 // Show days to display
 let elAns = document.getElementById("answer");
