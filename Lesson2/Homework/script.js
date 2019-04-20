@@ -39,6 +39,14 @@ for (let i = 0; i < qtyExpenses; i++) {
   let exp = prompt("Введите обязательную статью расходов в этом месяце", "");
   let money = prompt("Во сколько обойдется?", "");
 
+  // Prepare data (trim strings)
+  if (typeof (exp) === 'string'){
+    exp.trim();
+  }
+  if (typeof (money) === 'string'){
+    money.trim();
+  }
+
   // Is data valid?
   let isValid =
     typeof (exp) === 'string' && exp != '' && exp.length < 50 && // Check expense 
@@ -53,9 +61,11 @@ for (let i = 0; i < qtyExpenses; i++) {
 
   // Data is valid
   appData.expenses[exp] = +money;
-  console.log("Data SAVED!");
+  console.log(`Data SAVED! expense: "${exp}"; money: "${money}"`);
 }
+
 console.log(appData);
+
 // 1 day budget
 appData.moneyPerDay = appData.budget / 30;
 console.log("Бюджет на 1 день:" + appData.moneyPerDay);
