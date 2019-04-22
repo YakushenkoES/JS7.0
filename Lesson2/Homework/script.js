@@ -41,10 +41,7 @@ for (let i = 0; i < qtyExpenses; i++) {
 
   // Prepare data (trim strings)
   if (typeof (exp) === 'string'){
-    exp.trim();
-  }
-  if (typeof (money) === 'string'){
-    money.trim();
+    exp = exp.trim();
   }
 
   // Is data valid?
