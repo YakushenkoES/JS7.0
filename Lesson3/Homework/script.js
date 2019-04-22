@@ -4,7 +4,6 @@
 const frmtOK = "background-color:#99ffbb;";
 const frmtErr = "color:#cc0000;";
 
-
 // Main programm __________________________
 
 // Enter budget
