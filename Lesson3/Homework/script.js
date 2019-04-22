@@ -121,10 +121,12 @@ function askExpenseTitle(_message){
   let exp, isValid;
   do {
     exp = prompt(_message, "");
-    if (typeof (exp) === 'string') {
-      exp = exp.trim();
+    if (typeof (exp) !== 'string') {
+      continue;
     }
-    isValid = typeof (exp) === 'string' && exp != '' && exp.length < 50; // Check expense 
+
+    exp = exp.trim();
+    isValid = exp != '' && exp.length < 50; // Check expense 
     if (!isValid) {
       logErr("Data is not valid!");
     }
