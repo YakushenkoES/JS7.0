@@ -24,22 +24,16 @@ let appData = {
 let qtyExpenses = 2; // Quantity of expenses
 chooseExpenses(qtyExpenses);
 
-// 1 day budget
-appData.moneyPerDay = +(appData.budget / 30).toFixed();
-console.log("Бюджет на 1 день:" + appData.moneyPerDay);
-
-if (appData.moneyPerDay < 100) {
-  console.log("Минимальный уровень достатка");
-} else if (appData.moneyPerDay >= 100 && appData.moneyPerDay < 2000) {
-  console.log("Средний уровень достатка");
-} else if (appData.moneyPerDay >= 2000) {
-  console.log("Высокий уровень достатка");
-} else {
-  console.log("Произошла ошибка");
-}
+// 1 day budget and level
+detectDayBudget();
+detectLevel();
 
 // Check deposit savings
 checkSavings();
+
+// Optinal expenses
+chooseOptExpenses(3);
+
 console.log(appData);
 
 
@@ -59,19 +53,35 @@ function start() {
   logOk(`Data SAVED! money: "${money}"; time: "${time}"`);
 }
 
+function detectDayBudget() {
+  appData.moneyPerDay = +(appData.budget / 30).toFixed();
+  console.log("Бюджет на 1 день:" + appData.moneyPerDay);
+}
+
+function detectLevel() {
+  if (appData.moneyPerDay < 100) {
+    console.log("Минимальный уровень достатка");
+  } else if (appData.moneyPerDay >= 100 && appData.moneyPerDay < 2000) {
+    console.log("Средний уровень достатка");
+  } else if (appData.moneyPerDay >= 2000) {
+    console.log("Высокий уровень достатка");
+  } else {
+    console.log("Произошла ошибка");
+  }
+}
+
 function checkSavings() {
   if (appData.savings == true) {
     let save = askNumTillCorr("Какова сумма накоплений?");
     let percent = askNumTillCorr("Под какой процент?");
 
-    appData.monthIncome = save/12*percent/100;
+    appData.monthIncome = save / 12 * percent / 100;
     alert(`Доход в месяц с вашего депозита: ${appData.monthIncome}`);
   }
 }
 
 function chooseExpenses(qtyExpenses) {
   for (let i = 0; i < qtyExpenses; i++) {
-
     // Enter expense till correct
     let exp, isValid;
     do {
@@ -95,6 +105,12 @@ function chooseExpenses(qtyExpenses) {
   }
 }
 
+function chooseOptExpenses(qtyOptExpenses) {
+  for (let i = 0; i < qtyOptExpenses; i++) {
+    let bOpt = confirm("Статья необязательных расходов?");
+    appData.optionalExpenses[i+1] = bOpt;
+  }
+}
 
 function askNumTillCorr(_message) {
   // Спрашивать число, пока не введет корректное
@@ -114,9 +130,10 @@ function isNum(val) {
   return !isNaN(parseFloat(val)) && isFinite(val);
 }
 
-function logOk(_message){
-  console.log("%c"+_message, frmtOK);
+function logOk(_message) {
+  console.log("%c" + _message, frmtOK);
 }
-function logErr(_message){
-  console.log("%c"+_message, frmtErr);
+
+function logErr(_message) {
+  console.log("%c" + _message, frmtErr);
 }
