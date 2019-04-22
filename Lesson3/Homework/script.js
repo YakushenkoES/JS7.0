@@ -83,19 +83,8 @@ function checkSavings() {
 function chooseExpenses(qtyExpenses) {
   for (let i = 0; i < qtyExpenses; i++) {
     // Enter expense till correct
-    let exp, isValid;
-    do {
-      exp = prompt("Введите обязательную статью расходов в этом месяце", "");
-      if (typeof (exp) === 'string') {
-        exp = exp.trim();
-      }
-      isValid = typeof (exp) === 'string' && exp != '' && exp.length < 50; // Check expense 
-      if (!isValid) {
-        logErr("Data is not valid!");
-      }
-    }
-    while (!isValid);
-
+    let exp =askExpenseTitle("Введите обязательную статью расходов в этом месяце");
+    
     // Enter money till correct
     let money = askNumTillCorr("Во сколько обойдется?");
 
@@ -107,8 +96,9 @@ function chooseExpenses(qtyExpenses) {
 
 function chooseOptExpenses(qtyOptExpenses) {
   for (let i = 0; i < qtyOptExpenses; i++) {
-    let bOpt = confirm("Статья необязательных расходов?");
-    appData.optionalExpenses[i+1] = bOpt;
+    let exp = askExpenseTitle("Статья необязательных расходов?");
+    logOk(`Data SAVED! Optional expense: "${exp}"`);
+    appData.optionalExpenses[i+1] = exp;
   }
 }
 
@@ -124,6 +114,24 @@ function askNumTillCorr(_message) {
   }
   while (!valid);
   return +val;
+}
+
+function askExpenseTitle(_message){
+  // Enter expense till correct
+  let exp, isValid;
+  do {
+    exp = prompt(_message, "");
+    if (typeof (exp) === 'string') {
+      exp = exp.trim();
+    }
+    isValid = typeof (exp) === 'string' && exp != '' && exp.length < 50; // Check expense 
+    if (!isValid) {
+      logErr("Data is not valid!");
+    }
+  }
+  while (!isValid);
+
+  return exp;
 }
 
 function isNum(val) {
