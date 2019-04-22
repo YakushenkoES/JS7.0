@@ -4,6 +4,9 @@
 const frmtOK = "background-color:#99ffbb;";
 const frmtErr = "color:#cc0000;";
 
+// Main  
+// Main programm __________________________
+
 // Enter budget
 let money, time;
 start();
@@ -41,7 +44,7 @@ checkSavings();
 console.log(appData);
 
 
-//______________________________________________________
+// functions ______________________________________________________
 
 function start() {
   // Enter money
