@@ -9,7 +9,7 @@ getFriendlyNumbers(1, 100);
 getFriendlyNumbers(284, 500);
 
 // 2 pairs of friendly numbers
-getFriendlyNumbers(220, 1210);
+getFriendlyNumbers(1, 1211);
 
 function getFriendlyNumbers(start, end) {
 
