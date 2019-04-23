@@ -75,6 +75,8 @@ let appData = {
     });
 
     // Remove empty elements
+    // Лишняя проверка на пустую строку ( уже осуществляется при вызове askStringValue)
+    // Но хотелось попрактиковаться с callback'ами и функцией filter
     this.income = this.income.filter(function(value){
       return value.length > 0;
     });
