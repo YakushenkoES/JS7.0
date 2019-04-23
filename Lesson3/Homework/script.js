@@ -83,8 +83,8 @@ function checkSavings() {
 function chooseExpenses(qtyExpenses) {
   for (let i = 0; i < qtyExpenses; i++) {
     // Enter expense till correct
-    let exp =askExpenseTitle("Введите обязательную статью расходов в этом месяце");
-    
+    let exp = askExpenseTitle("Введите обязательную статью расходов в этом месяце");
+
     // Enter money till correct
     let money = askNumTillCorr("Во сколько обойдется?");
 
@@ -98,7 +98,7 @@ function chooseOptExpenses(qtyOptExpenses) {
   for (let i = 0; i < qtyOptExpenses; i++) {
     let exp = askExpenseTitle("Статья необязательных расходов?");
     logOk(`Data SAVED! Optional expense: "${exp}"`);
-    appData.optionalExpenses[i+1] = exp;
+    appData.optionalExpenses[i + 1] = exp;
   }
 }
 
@@ -116,7 +116,7 @@ function askNumTillCorr(_message) {
   return +val;
 }
 
-function askExpenseTitle(_message){
+function askExpenseTitle(_message) {
   // Enter expense till correct
   let exp, isValid;
   do {
