@@ -1,7 +1,9 @@
+
 // Check validation
 getFriendlyNumbers(null, "asdas");
 getFriendlyNumbers("1", "300");
 getFriendlyNumbers(300, 1);
+getFriendlyNumbers(1, 1);
 
 // Lesson task
 getFriendlyNumbers(1, 300);
@@ -14,17 +16,8 @@ getFriendlyNumbers(1, 1211);
 function getFriendlyNumbers(start, end) {
 
   // Check
-  if (!isNum(start) || !isNum(end)) {
-    console.log(`[${start} ${end}] Data is not valid`);
-    return false;
-  }
-  if (typeof (start) === "string") {
-    start = +start;
-  }
-  if (typeof (end) === "string") {
-    end = +end;
-  }
-  let valid = end > 0 && start > 0 && end > start && start % 1 === 0 && end % 1 === 0;
+  let valid = Number.isInteger(start) && Number.isInteger(end) && end > 0 && start > 0 &&
+   end >= start && start % 1 === 0 && end % 1 === 0;
   if (!valid) {
     console.log(`[${start} ${end}]  Data is not valid`);
     return false;
@@ -44,10 +37,6 @@ function getFriendlyNumbers(start, end) {
 
   console.log(`${start}-${end} result [${ans.join("] [")}]`);
   return ans;
-}
-
-function isNum(val) {
-  return !isNaN(parseFloat(val)) && isFinite(val);
 }
 
 function calcOwnMathDividerSumm(n) {
