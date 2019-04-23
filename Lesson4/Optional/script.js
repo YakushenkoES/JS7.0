@@ -1,30 +1,25 @@
-//
-//// Check validation
-//getFriendlyNumbers(null, "asdas");
-//getFriendlyNumbers("1", "300");
-//getFriendlyNumbers(300, 1);
-//getFriendlyNumbers(1.5, 300.3);
-//getFriendlyNumbers(1, 1);
-//
-//// Lesson task
-//getFriendlyNumbers(1, 300);
-//getFriendlyNumbers(1, 100);
-//getFriendlyNumbers(284, 500);
-//
-//// 2 pairs of friendly numbers
-//getFriendlyNumbers(1, 1211);
+// Check validation
+getFriendlyNumbers(null, "asdas");
+getFriendlyNumbers("1", "300");
+getFriendlyNumbers(300, 1);
+getFriendlyNumbers(1.5, 300.3);
+getFriendlyNumbers(1, 1);
 
+// Lesson task
+getFriendlyNumbers(1, 300);
+getFriendlyNumbers(1, 100);
+getFriendlyNumbers(284, 500);
 
- console.log(" method 2.1");
- let d1 = new Date();
- getFriendlyNumbersFast(1, 500000);
- let d2 = new Date();
+// 2 pairs of friendly numbers
+getFriendlyNumbers(1, 1211);
 
+// Time testing
+let d1 = new Date();
+getFriendlyNumbers(1, 500000);
+let d2 = new Date();
 console.log(`${(d2-d1)/1000/60} минут`);
 
-
-
-function getFriendlyNumbersFast(start, end) {
+function getFriendlyNumbers(start, end) {
   // Check
   let valid = Number.isInteger(start) && Number.isInteger(end) && end > 0 && start > 0 && end >= start;
   if (!valid) {
@@ -43,7 +38,7 @@ function getFriendlyNumbersFast(start, end) {
   let ans = [];
   for (let i = start; i <= end; i++) {
     let sum1 = sums[i-start];
-    for (let j = i + 1; j <= end; j++) {
+    for (let j = i + 1; j <= sum1; j++) {
       let sum2 = sums[j-start];
       if (i == sum2 && j == sum1) {
         ans.push([i, j]);
@@ -56,7 +51,7 @@ function getFriendlyNumbersFast(start, end) {
 }
 
 
-function getFriendlyNumbers(start, end) {
+function getFriendlyNumbersOldMethod(start, end) {
 
   // Check
   let valid = Number.isInteger(start) && Number.isInteger(end) && end > 0 && start > 0 && end >= start;
