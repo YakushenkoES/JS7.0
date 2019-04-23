@@ -1,6 +1,6 @@
 // Check validation
 getFriendlyNumbers(null, "asdas");
-getFriendlyNumbers(1, 300);
+getFriendlyNumbers("1", "300");
 getFriendlyNumbers(300, 1);
 
 // Lesson task
