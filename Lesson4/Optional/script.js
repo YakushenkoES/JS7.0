@@ -83,13 +83,8 @@ function getFriendlyNumbers2(start, end) {
 
     let sum2 = sums[j - start];
 
-    // Second value could be only greater then first
-    if (j <= i) {
-      continue;
-    }
-
     // Is friendly
-    if (i == sum2) {
+    if (j > i && i == sum2) {
       ans.push([i, j]);
     }
   }
