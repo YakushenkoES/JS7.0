@@ -41,7 +41,7 @@ function correctDateString(str) {
   return ans;
 }
 let incorrStr = "1.6.2018";
-console.log(`Корерктировка строки с датой. Было: "${incorrStr}". Стало: "${correctDateString("1.6.2018")}".`);
+console.log(`Корерктировка строки с датой. Было: "${incorrStr}". Стало: "${correctDateString(incorrStr)}".`);
 
 
 
