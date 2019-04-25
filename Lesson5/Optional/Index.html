@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+  <style>
+    input{
+      padding: 4px;
+      border-radius: 4px;
+      border: solid 1px lightgray;
+      outline: none;
+    }
+    label{
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="ans">
+    <p id="time"></p>
+    <p id="today"></p>
+  </div>
+
+  <div>
+    <label for="dt1">Дата 1</label>
+    <input id="dt1" type="datetime-local" step="1">
+    <label for="dt2">Дата 2</label>
+    <input id="dt2" type="datetime-local" step="1">
+    <br>
+    <label for="dayDiffResult">Результат</label>
+    <span id="dayDiffResult"></span>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
