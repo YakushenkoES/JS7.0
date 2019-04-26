@@ -21,13 +21,13 @@
         <div class="data">
             <div class="choose-expenses">Введите обязательные расходы</div>
             <input class="expenses-item" type="text" id="expenses_1" placeholder="Наименование">
-			<input class="expenses-item" type="text" id="expenses_2" placeholder="Цена">
+			<input class="expenses-item" type="number" min="0" id="expenses_2" placeholder="Цена">
 			<input class="expenses-item" type="text" id="expenses_3" placeholder="Наименование">
-			<input class="expenses-item" type="text" id="expenses_4" placeholder="Цена">
+			<input class="expenses-item" type="number" min="0" id="expenses_4" placeholder="Цена">
             <button class="expenses-item-btn">Утвердить</button>
             
             <div class="optionalexpenses">Введите необязательные расходы</div>
-			<input class="optionalexpenses-item" type="text" id="optionalexpenses_1">
+			<input class="optionalexpenses-item" pattern="[а-яА-ЯЁё]" required type="text" id="optionalexpenses_1">
 			<input class="optionalexpenses-item" type="text" id="optionalexpenses_2">
 			<input class="optionalexpenses-item" type="text" id="optionalexpenses_3">
             <button class="optionalexpenses-btn">Утвердить</button>
@@ -42,9 +42,9 @@
                 <input id="savings" type="checkbox" />
             </div>
             <label for="sum">Сумма</label>
-			<input class="choose-sum" id="sum" type="text">
+			<input class="choose-sum" id="sum" type="number" min="0">
 			<label for="percent">Процент</label>
-            <input class="choose-percent" id="percent" type="text">
+            <input class="choose-percent" id="percent" type="number" step="0.1" min="0">
             
             <div class="open">
                 <button class="start" id="start">Начать расчет</button>

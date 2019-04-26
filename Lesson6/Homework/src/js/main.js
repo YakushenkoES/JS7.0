@@ -1,5 +1,13 @@
 'use strict';
 
+//i
+//Если этот флаг есть, то регэксп ищет независимо от регистра, то есть не различает между А и а.
+//g
+//Если этот флаг есть, то регэксп ищет все совпадения, иначе – только первое.
+//str.match(/[а-яё]/ig);
+//str.replace(/[^а-яё]*/ig, "");
+
+
 // log output formats
 const frmtOK = "background-color:#99ffbb;";
 const frmtErr = "color:#cc0000;";
@@ -28,7 +36,7 @@ let btns = {
 };
 
 let inputs = {
-  expenses: document.getElementsByClassName("expenses-item"),
+  expenses: document.querySelectorAll(".expenses-item"),
   optExpenses: document.querySelectorAll(".data input.optionalexpenses-item"),
   income: document.querySelector("#income"),
   checkSavings: document.querySelector("#savings"),
@@ -40,8 +48,14 @@ let inputs = {
   day: document.querySelector(".time-data .day .day-value")
 };
 
+//Prepare elements________
+for (const bt in btns) {
+  btns[bt].disabled=true;
+}
+btns.start.disabled=false;
 
 // Start_______________
+let started = false;
 btns.start.addEventListener("click", function () {
 
   let dt = askDate(); // Enter date
@@ -54,6 +68,12 @@ btns.start.addEventListener("click", function () {
   inputs.year.value = dt.getFullYear();
   inputs.month.value = dt.getMonth() + 1;
   inputs.day.value = dt.getDate();
+
+  btns.calcDayBudget.disabled=false;
+  console.log(btns.calcDayBudget);
+  started=true;
+  checkExpensesBtnEnabled();
+  checkOptExpenseBtnEnabled();
   logOk(`Data SAVED! money: "${money}"; time: "${dt}"`);
 });
 
@@ -69,6 +89,19 @@ btns.confirmExps.addEventListener("click", function () {
     appData.expenses[exp] = money; // Save data
   }
   values.expenses.textContent = sum;
+  btns.calcDayBudget.click();
+});
+function checkExpensesBtnEnabled(){
+  let ok=true;
+    inputs.expenses.forEach(function(ob){
+      ok=ok&&(ob.value.length>0);
+    });
+    btns.confirmExps.disabled = !started || !ok;
+}
+inputs.expenses.forEach(function(input){
+  input.addEventListener("change", function(){
+    checkExpensesBtnEnabled();
+  });
 });
 
 // Optional expenceses________
@@ -84,6 +117,31 @@ btns.confirmOptionalExps.addEventListener("click", function () {
   }
   values.optExpenses.textContent = output;
 });
+function checkOptExpenseBtnEnabled(){
+  let ok=false;
+  inputs.optExpenses.forEach(function(ob){
+    ok=ok||(ob.value.length>0);
+  });
+  btns.confirmOptionalExps.disabled = !started || !ok;
+}
+inputs.optExpenses.forEach(function(input){
+  input.addEventListener("change", function(){
+    checkOptExpenseBtnEnabled();
+  });
+
+  // Вводить только русские буквы и ничего кроме
+  input.addEventListener("input", function(event){
+    // Смысл: определить, что редактируется текст,
+    // найти все, что не относится к русским буквам и заменить это на пустую строку
+    // Регулярное выражение:
+    // [^а-яё] - все, кроме (^) символов диапазона ([]) русских букв (а-яё), буква ё стоит особняком, её отдельно
+    // + 1 или более вхождений
+    // ig искать все случаи и не обращать внмание на регистр 
+    event.target.value=event.target.value.replace(/[^а-яё]+/ig, "");
+  });
+});
+
+
 
 // Day budget__________
 btns.calcDayBudget.addEventListener("click", function () {
@@ -95,7 +153,15 @@ btns.calcDayBudget.addEventListener("click", function () {
     return;
   }
 
-  appData.moneyPerDay = +(appData.budget / 30).toFixed();
+  let expensesMoney=0;
+  for(const exp in appData.expenses ){
+    let val = appData.expenses[exp];
+    if(!isNaN(val)){
+      expensesMoney+=val;
+    }
+  }
+
+  appData.moneyPerDay = ((appData.budget - expensesMoney) / 30).toFixed();
   let level = "";
   if (appData.moneyPerDay < 100) {
     level = "Минимальный уровень достатка";

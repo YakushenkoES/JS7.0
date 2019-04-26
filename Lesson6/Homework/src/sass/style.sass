@@ -24,7 +24,7 @@ a
 		text-decoration: none
 		color:inherit
 .app
-    background-color: #faf8f5
+    background-color: #e4fff1
     min-height: 800px
 .logo
     width: 100%
@@ -54,6 +54,9 @@ a
         &::placeholder
             opacity: .3
     .expenses-item-btn, .optionalexpenses-btn, .count-budget-btn
+        &:disabled
+             background: rgb(156, 156, 156)
+             
         @include btn
     .optionalexpenses-item
         width: calc((100%/3) - 4px)
@@ -101,6 +104,7 @@ a
         .budget-value, .daybudget-value, .level-value, .expenses-value, .optionalexpenses-value, .income-value, .monthsavings-value, .yearsavings-value
             color: $result
             word-break: break-word
+            
     .time-data
         width: 100%
         margin: 0 auto

@@ -1,16 +1,16 @@
 $text-color: #262626
-$active: #ff6a30
+$active: #2874ee
 $result: #61a654
 
 @mixin header 
     margin: 13px 0px
     font-weight: 500
-    font-size: 14px
+    font-size: 16px
     color: $text-color
     text-align: center
 @mixin input
     height: 35px
-    width: calc((100%/2) - 4px)
+    width: calc((100%/2) - 10px)
     border-radius: 2.5px
     background-color: #ffffff
     box-shadow: 0px 2.5px 10px 0 rgba(1, 0, 42, 0.1)
@@ -19,6 +19,8 @@ $result: #61a654
     margin-bottom: 10px
     font-size: 14px
     color: #a7a7a7
+    &:focus
+        border-left: solid 3px lighten($active, 10)
 @mixin btn
     width: 70px
     height: 30px
@@ -26,7 +28,7 @@ $result: #61a654
     margin: 0 auto
     border: none
     border-radius: 2.5px
-    background-image: linear-gradient(336deg, #ffbd75, #ff964b), linear-gradient(#ffffff, #ffffff)
+    background-image: linear-gradient(336deg, darken($active, 5), lighten($active, 5) ), linear-gradient(#ffffff, #ffffff)
     box-shadow: 0px 2.5px 10px 0 rgba(1, 0, 42, 0.1)
     color: #fff
     font-weight: 100
