@@ -184,9 +184,6 @@ console.log(appData);
 
 
 // functions ______________________________________________________
-
-
-
 function askDate() {
   // Enter date
   let sNow = new Date().toISOString().slice(0, 10),
