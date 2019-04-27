@@ -147,6 +147,11 @@ inputs.optExpenses.forEach(function(input){
   inp.addEventListener("input", function(){
     event.target.value=event.target.value.replace(/[^0-9,.]+/g, "");
   });
+
+  inp.addEventListener("btn", function(){
+    event.target.value=event.target.value.replace(/[^0-9,.]+/g, "");
+  });
+
 });
 
 
