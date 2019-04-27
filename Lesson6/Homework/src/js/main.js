@@ -87,7 +87,7 @@ btns.confirmExps.addEventListener("click", function () {
     let exp = inputs.expenses[0 + i * 2].value; // Title
     let money = +inputs.expenses[1 + i * 2].value; // Value
     sum += money;
-    appData.expenses[exp] = money; // Save data
+    appData.expenses[exp+"_"+i] = money; // Save data
   }
   values.expenses.textContent = sum;
   btns.calcDayBudget.click();
