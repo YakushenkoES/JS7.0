@@ -139,10 +139,15 @@ inputs.optExpenses.forEach(function(input){
     // [^а-яё] - все, кроме (^) символов диапазона ([]) русских букв (а-яё), буква ё стоит особняком, её отдельно
     // + 1 или более вхождений
     // ig искать все случаи и не обращать внмание на регистр 
-    event.target.value=event.target.value.replace(/[^а-яё]+/ig, "");
+    event.target.value=event.target.value.replace(/[^а-яё]+/ig, ""); // .replace(/[^.,]+/ig, "");//
   });
 });
 
+[inputs.expenses[1],inputs.expenses[3], inputs.savingsSumm, inputs.savingsPC].forEach(function(inp){
+  inp.addEventListener("input", function(){
+    event.target.value=event.target.value.replace(/[^0-9,.]+/g, "");
+  });
+});
 
 
 // Day budget__________
