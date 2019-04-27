@@ -58,7 +58,7 @@ el.textContent = "Текущий день недели: " + today;
 // Напишите функцию, которая выводит на страницу разницу между двумя датами в количестве дней
 // Prepare inputs
 let inputDt1 = document.getElementById("dt1"),
-    inputDt2 = document.getElementById("dt2");
+  inputDt2 = document.getElementById("dt2");
 
 inputDt1.addEventListener("change", onChangeDate);
 inputDt2.addEventListener("change", onChangeDate);
@@ -91,5 +91,5 @@ function onChangeDate() {
 
 // Найти разницу дат и выразить её в днях
 function dayDiff(dt1, dt2) {
-  return ((dt2 - dt1) / (1000 * 60 * 60 * 24)).toFixed(2);
+  return Math.abs(  ((dt2 - dt1) / (1000 * 60 * 60 * 24)).toFixed(2)  );
 }
