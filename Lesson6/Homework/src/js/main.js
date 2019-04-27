@@ -81,6 +81,7 @@ btns.start.addEventListener("click", function () {
 btns.confirmExps.addEventListener("click", function () {
   let sum = 0;
   let qtyExpenses = Math.floor(inputs.expenses.length / 2);
+  appData.expenses = {};// Очистить
   for (let i = 0; i < qtyExpenses; i++) {
 
     let exp = inputs.expenses[0 + i * 2].value; // Title
@@ -109,6 +110,7 @@ btns.confirmOptionalExps.addEventListener("click", function () {
   let qtyOpt = inputs.optExpenses.length;
 
   let output = "";
+  appData.optionalExpenses={}; // зачистить
   for (let i = 0; i < qtyOpt; i++) {
     let exp = inputs.optExpenses[i].value;
     appData.optionalExpenses["" + (i + 1)] = exp;
