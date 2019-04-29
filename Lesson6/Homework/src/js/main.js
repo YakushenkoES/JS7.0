@@ -193,7 +193,7 @@ inputs.income.addEventListener("input", function () {
 
   // Remove white spaces in each element (in the start anв end)
   incomes.forEach((val, ind, inputArr) => {
-    incomes[ind] = val.trim();
+    inputArr[ind] = val.trim();
   });
   // Remove empty elements
   incomes = incomes.filter(function (value) {
@@ -301,26 +301,7 @@ function askNum(_message) {
   return +val;
 }
 
-function askString(_message, _maxLen) {
-  // Enter expense till correct
-  let exp, isValid = false;
-  do {
-    exp = prompt(_message, "");
-    if (typeof (exp) !== 'string') {
-      logErr("Data is not valid!");
-      continue;
-    }
 
-    exp = exp.trim();
-    isValid = exp != '' && (typeof (_maxLen) === "undefined" ? true : exp.length < 50); // Check expense 
-    if (!isValid) {
-      logErr("Data is not valid!");
-    }
-  }
-  while (!isValid);
-
-  return exp;
-}
 
 function isNum(val) {
   return !isNaN(parseFloat(val)) && isFinite(val);
