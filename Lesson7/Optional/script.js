@@ -1,11 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
 
   let heart = document.querySelector(".heart"),
-    height = 400, // initial height
+    height = parseFloat(window.getComputedStyle(heart, null).height), 
     start = document.querySelector(".start"),
     animActive = false,
     hrCtrl = document.querySelector("#hr"),
     HR = +hrCtrl.value;
+
 
   hrCtrl.addEventListener("input", function () {
     HR = +this.value;
