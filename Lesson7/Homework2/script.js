@@ -20,7 +20,4 @@ document.addEventListener("DOMContentLoaded", function () {
     ansEl.textContent = strTime;
   }
 
-
-
-
 });
