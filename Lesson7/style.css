@@ -1,0 +1,30 @@
+button{
+  border: none;
+  outline: none;
+  background-color: crimson;
+  color: #fff;
+  padding: 0.375rem 0.75rem;
+}
+
+.box{
+  margin: 10px;
+  position: relative;
+  height: 400px;
+  width: 400px;
+  border: solid 1px red;
+  box-sizing: content-box;
+}
+
+.rec{
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  top: 0;
+  left: 0;
+  background-color: rgb(51, 151, 89);
+}
+
+.btn-block{
+  background-color: #DDD;
+  padding: 10px;
+}
