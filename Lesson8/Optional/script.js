@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", function () {
- 
+  'use strict';
   // Добавить обработчик ко всем a
   document.body.addEventListener("click", function (e) {
     if (e.target && e.target.matches("a")) {

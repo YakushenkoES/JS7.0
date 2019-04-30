@@ -6,9 +6,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
   function getTimeRemaining(endTime) {
     let t = Date.parse(endTime) - Date.now(),
-      seconds = t<=0?0:Math.floor((t / 1000) % 60),
-      minutes = t<=0?0:Math.floor((t / 1000 / 60) % 60),
-      hours = t<=0?0:Math.floor(t / 1000 / 60 / 60);
+      seconds = t <= 0 ? 0 : Math.floor((t / 1000) % 60),
+      minutes = t <= 0 ? 0 : Math.floor((t / 1000 / 60) % 60),
+      hours = t <= 0 ? 0 : Math.floor(t / 1000 / 60 / 60);
 
     return {
       "total": t,
