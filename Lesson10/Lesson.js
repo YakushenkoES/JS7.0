@@ -37,6 +37,7 @@ arr2[4]();
 arr2[8]();
 
 let fun = () => {
+  console.log("=>");
   console.log(this);
 };
 fun();
@@ -58,6 +59,7 @@ obj.sayNumber();
 let btn = document.querySelector("button");
 btn.addEventListener("click", function () {
   let show = () => {
+    console.log("=> =>");
     console.log(this);
   };
   show();

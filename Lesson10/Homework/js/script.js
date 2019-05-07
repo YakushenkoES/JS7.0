@@ -3,12 +3,12 @@ window.addEventListener('DOMContentLoaded', function () {
   'use strict';
   // Popup___________________________
   let moreBtns = document.querySelectorAll(".more, .description-btn"),
-  overlay = document.querySelector(".overlay"),
-  close = document.querySelector(".popup-close");
+    overlay = document.querySelector(".overlay"),
+    close = document.querySelector(".popup-close");
 
   let currDescBtn;
   moreBtns.forEach(btn => {
-      btn.addEventListener("click", function(){
+    btn.addEventListener("click", function () {
       overlay.style.display = "block";
       this.classList.add("more-splash");
       document.body.style.overflow = "hidden";
@@ -16,10 +16,10 @@ window.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  close.addEventListener("click", function(){
+  close.addEventListener("click", function () {
     overlay.style.display = "none";
     document.body.style.overflow = "auto";
-    if(currDescBtn != undefined){
+    if (currDescBtn != undefined) {
       currDescBtn.classList.remove("more-splash");
     }
   });
@@ -74,18 +74,18 @@ window.addEventListener('DOMContentLoaded', function () {
 
   switchTab(0);
 
-  function switchTab(ind) {
+  function switchTab(ind = 0) {
 
     if (ind < 0 || ind >= tab.length) {
       return;
     }
 
-    function hide(el) {
+    let hide = (el) => {
       el.classList.add('hide');
       el.classList.remove('show');
     }
 
-    function show(el) {
+    let show = (el) => {
       el.classList.add('show');
       el.classList.remove('hide');
     }
