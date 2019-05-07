@@ -1,0 +1,2 @@
+Решение взял отсюда
+https://javascript.ru/forum/dom-window/63870-kak-sdelat-masku-telefona-v-input-c-7-___-bez-jquery.html
