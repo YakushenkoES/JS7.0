@@ -38,6 +38,7 @@ window.addEventListener('DOMContentLoaded', function () {
     toggleVisibility(blocks[1]);
     blocks.forEach(bl => {
       bl.classList.toggle('popup__call-phone-hidden');
+      bl.querySelector('.popup__call-svg').classList.toggle("popup__call-svg-active", false);
     });
     
     Init();
