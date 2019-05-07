@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('DOMContentLoaded', () => {
 
   'use strict';
   // Popup___________________________
@@ -35,9 +35,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
     return {
       "total": t,
-       hours,
-       minutes,
-       seconds
+      hours,
+      minutes,
+      seconds
     };
   }
 
@@ -83,12 +83,12 @@ window.addEventListener('DOMContentLoaded', function () {
     let hide = (el) => {
       el.classList.add('hide');
       el.classList.remove('show');
-    }
+    };
 
     let show = (el) => {
       el.classList.add('show');
       el.classList.remove('hide');
-    }
+    };
 
     for (let i = 0; i < tabContent.length; i++) {
       i == ind ? show(tabContent[i]) : hide(tabContent[i]);
