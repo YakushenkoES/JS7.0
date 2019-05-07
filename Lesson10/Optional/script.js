@@ -45,8 +45,10 @@ window.addEventListener('DOMContentLoaded', function () {
       return ch;
     });
 
-    // Установить курсор на нужную позицию
-    setCursorPosition(cursorPos == 0 ? this.value.length : cursorPos, this);
+    // Установить курсор на нужную позицию НО ТОЛЬКО НЕ ТОГДА когда фокус снимается
+    if (event.type != "blur"){
+      setCursorPosition(cursorPos == 0 ? this.value.length : cursorPos, this);
+    }
   }
 
   function setCursorPosition(pos, elem) {
