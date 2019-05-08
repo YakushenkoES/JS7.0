@@ -9,56 +9,112 @@ window.addEventListener('DOMContentLoaded', () => {
     failure: 'Что-то пошло не так...'
   };
 
-  let form = document.querySelector(".main-form"),
-    input = form.getElementsByTagName('input'),
+  let forms = document.querySelectorAll("form.main-form, form#form"),
     statusMessage = document.createElement('div');
 
   statusMessage.classList.add('status');
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
+  forms.forEach((form) => {
+    let inputs = form.getElementsByTagName('input');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+console.log("submit");
+      form.appendChild(statusMessage);
 
-    form.appendChild(statusMessage);
+      let req = new XMLHttpRequest();
 
-    let req = new XMLHttpRequest();
+      req.addEventListener('readystatechange', () => {
+        if (req.readyState < 4) {
+          statusMessage.textContent = message.loading;
+        } else if (req.readyState === 4 && req.status === 200) {
+          statusMessage.textContent = message.success;
+        } else {
+          statusMessage.textContent = message.failure;
+        }
 
-    req.addEventListener('readystatechange', () => {
-      if (req.readyState < 4) {
-        statusMessage.textContent = message.loading;
-      } else if (req.readyState === 4 && req.status === 200) {
-        statusMessage.textContent = message.success;
-      } else {
-        statusMessage.textContent = message.failure;
+      });
+
+      // Могу забыть поменять на 'server.php'
+      req.open('POST', 'http://yoga.local/server.php'); // Для openserver в другом домене и кросс-доменными запросами
+      // req.open('POST','server.php'); // Для случая, когда и страница и php в одном домене
+
+
+      // Обычная форма
+      req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      let formData = new FormData(form);
+      req.send(formData);
+
+      // JSON файлы
+      //req.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+      // Если ругается но ошибку кроссдоменных запросов (из-за 'application/json; charset=utf-8')
+      //, то можно req.setRequestHeader('Content-Type', 'text/plain;charset=UTF-8'); или убрать её
+      let obj = {};
+      formData.forEach((value, key) => {
+        obj[key] = value;
+      });
+      let strJSON = JSON.stringify(obj);
+      //req.send(strJSON);
+
+
+      for (let i = 0; i < inputs.length; i++) {
+        inputs[i].value = '';
       }
-
     });
-
-    // Заморачивался с openserver и кросс-доменными запросами, поэтому такой адрес
-    // могу забыть поменять на 'server.php'
-    req.open('POST', 'http://yoga.local/server.php');
-    // req.open('POST','server.php');
-
-
-    // Обычная форма
-    req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    let formData = new FormData(form);
-    req.send(formData);
-
-    // JSON файлы
-    //req.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-    // Если ругается но ошибку кроссдоменных запросов (из-за 'application/json; charset=utf-8'), то можно
-    // req.setRequestHeader('Content-Type', 'text/plain;charset=UTF-8');
-    let obj={};
-    formData.forEach((value, key)=>{
-      obj[key] = value;
-    });
-    let strJSON = JSON.stringify(obj);
-    //req.send(strJSON);
-
-
-    for (let i = 0; i < input.length; i++) {
-      input[i].value = '';
-    }
   });
+
+  let maskPhone = "+7 (___) ___ __ __"; // Маска ввода
+  document.querySelectorAll('input[type=tel]').forEach((tel)=>{
+    initPhoneMask(tel, maskPhone);
+  });
+
+  function initPhoneMask(_element, _mask) {
+    _element.addEventListener('input', process);
+    _element.addEventListener('focus', process);
+    _element.addEventListener('blur', process);
+
+    function process(e) {
+            
+      let matrix = _mask; // Маска ввода
+      let def = matrix.replace(/\D/g, ""),
+        val = _element.value.replace(/\D/g, "");
+
+      if (def.length >= val.length) {
+        val = def;
+      }
+      let iNum = 0,
+        cursorPos = 0,
+        im = 0;
+        _element.value = matrix.replace(/./g, function (a) {
+
+        let numberPlace = /[_\d]/.test(a);
+        let ch = "";
+        if (numberPlace && iNum < val.length) {
+          ch = val.charAt(iNum++);
+          cursorPos = im + 1;
+        } else {
+          ch = a;
+        }
+        im++;
+        return ch;
+      });
+
+      if (event.type != "blur") {
+        setCursorPosition(cursorPos == 0 ? _element.value.length : cursorPos, _element);
+      }
+    }
+
+    function setCursorPosition(pos, elem) {
+      elem.focus();
+      if (elem.setSelectionRange) {
+        elem.setSelectionRange(pos, pos);
+      } else if (elem.createTextRange) {
+        var range = elem.createTextRange();
+        range.collapse(true);
+        range.moveEnd("character", pos);
+        range.moveStart("character", pos);
+        range.select();
+      }
+    }
+  }
 
 
 
@@ -86,7 +142,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   // Timer___________________________
-  let deadLine = "2019-05-09";
+  let deadLine = "2019-06-09";
 
   function getTimeRemaining(endTime) {
     let t = Date.parse(endTime) - Date.now(),
@@ -169,5 +225,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
   });
+
 
 });
