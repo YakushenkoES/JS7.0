@@ -33,10 +33,8 @@ console.log("submit");
 
       });
 
-      // Могу забыть поменять на 'server.php'
-      req.open('POST', 'http://yoga.local/server.php'); // Для openserver в другом домене и кросс-доменными запросами
-      // req.open('POST','server.php'); // Для случая, когда и страница и php в одном домене
-
+      //req.open('POST', 'http://yoga.local/server.php'); // Для openserver в другом домене и кросс-доменными запросами
+       req.open('POST','server.php'); // Для случая, когда и страница и php в одном домене
 
       // Обычная форма
       req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
