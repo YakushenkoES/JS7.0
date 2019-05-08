@@ -1,6 +1,35 @@
 @main-color: #c78030;
 @dark: #373737;
 
+.requestStatus{
+
+	@height: 32px;
+
+	position: relative;
+	@width: @height;
+	height: @height;
+	
+	&-img{
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		height: @height;
+		width: @width;
+		background-position: center center;
+		background-size: contain;
+		background-repeat: no-repeat;
+
+	}
+	&-status{
+		height: @height;
+		position: absolute;
+		top: 0;
+		left: @width + 5px;
+		line-height: @height;
+	}
+}
+
 .fade {
   animation-name: fade;
   animation-duration: 2.5s;

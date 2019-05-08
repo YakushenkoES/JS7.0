@@ -3,34 +3,46 @@ window.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
   // Form ___________________________
+  function createReqStatusEl(form){
+    let div = document.createElement('div');
+    let text = document.createElement('div');
+    let img = document.createElement('div');
+    div.classList.add('requestStatus');
+    text.classList.add('status','requestStatus-status');
+    img.classList.add('requestStatus-img');
+    div.appendChild(img);
+    div.appendChild(text);
+    form.appendChild(div);
+    return div;
+  }
   let message = {
     loading: 'Загрузка',
     success: 'Спасибо! Скоро мы с вами свяжемся!',
     failure: 'Что-то пошло не так...'
   };
 
-  let forms = document.querySelectorAll("form.main-form, form#form"),
-    statusMessage = document.createElement('div');
+  let forms = document.querySelectorAll("form.main-form, form#form");
 
-  statusMessage.classList.add('status');
   forms.forEach((form) => {
     let inputs = form.getElementsByTagName('input');
+    let statusMessage = createReqStatusEl(form);
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-console.log("submit");
-      form.appendChild(statusMessage);
 
       let req = new XMLHttpRequest();
 
       req.addEventListener('readystatechange', () => {
         if (req.readyState < 4) {
-          statusMessage.textContent = message.loading;
+          statusMessage.querySelector('.status').textContent = message.loading;
+          statusMessage.querySelector('.requestStatus-img').style.backgroundImage ="url('icons/loader.gif')";
+          
         } else if (req.readyState === 4 && req.status === 200) {
-          statusMessage.textContent = message.success;
+          statusMessage.querySelector('.status').textContent = message.success;
+          statusMessage.querySelector('.requestStatus-img').style.backgroundImage ="url('icons/ok.svg')";
         } else {
-          statusMessage.textContent = message.failure;
+          statusMessage.querySelector('.status').textContent = message.failure;
+          statusMessage.querySelector('.requestStatus-img').style.backgroundImage ="url('icons/error.svg')";
         }
-
       });
 
       //req.open('POST', 'http://yoga.local/server.php'); // Для openserver в другом домене и кросс-доменными запросами
