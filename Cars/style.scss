@@ -1,0 +1,77 @@
+html{
+  font-family: Arial, serif;
+  font-size: 16px;
+  color: #2a2a2a;
+}
+
+h1 {
+  font-size: 4rem;
+  text-align: center;
+}
+
+.cars{
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  &-controls{
+    text-align: center;
+    select{
+      width: auto;
+      font-size: 1.3rem;
+      padding: 10px;
+      border-radius: 3px;
+    }
+  }
+  .car{
+    flex-basis: 600px;
+    margin: 20px;
+    padding: 20px;
+    border: solid 1px #DDD;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    &-header{
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    &-image{
+      object-fit: cover;
+      object-position: center;
+      height: 400px;
+      width: calc(100% - 10px);
+      align-content: center;
+      margin: 5px;
+    }
+
+    &-param{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 200px;
+      margin: 5px;
+      
+      font-size: 1.2rem;
+
+      &-label{
+        margin-right: 10px;
+      }
+
+      &-value{
+        font-weight: 700;
+      }
+    }
+
+
+    &-desc{
+      font-size: 1.1rem;
+      margin: 5px;
+      padding: 5px;
+      margin-top: 2rem;
+    }
+    //flex-basis: 400px;
+  }
+}
