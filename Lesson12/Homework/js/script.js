@@ -3,76 +3,132 @@ window.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
   // Form ___________________________
-  function createReqStatusEl(form){
+
+  // Функция создания элемента со статусом запроса
+  function createReqStatusEl(form) {
     let div = document.createElement('div');
     let text = document.createElement('div');
     let img = document.createElement('div');
     div.classList.add('requestStatus');
-    text.classList.add('status','requestStatus-status');
+    text.classList.add('status', 'requestStatus-status');
     img.classList.add('requestStatus-img');
     div.appendChild(img);
     div.appendChild(text);
     form.appendChild(div);
     return div;
   }
-  let message = {
-    loading: 'Загрузка',
-    success: 'Спасибо! Скоро мы с вами свяжемся!',
-    failure: 'Что-то пошло не так...'
-  };
 
+  // Извлечь формы с запросом
   let forms = document.querySelectorAll("form.main-form, form#form");
 
+  // Для каждой формы...
   forms.forEach((form) => {
-    let inputs = form.getElementsByTagName('input');
-    let statusMessage = createReqStatusEl(form);
+
+    let statusMessage = createReqStatusEl(form); // Создать элемент статуса запроса
+
+    // Обработать событие отправки формы
     form.addEventListener('submit', function (e) {
-      e.preventDefault();
+      e.preventDefault(); // Отключение событий по умолчанию для ajax запроса
+      let fOnWaitLoading, fOnWaitDone; // Переменные для функций обработки 'readystatechange'
+      // нужны, чтобы их можно было потом "отписать" от события
 
-      let req = new XMLHttpRequest();
+      // Функция создатель промиса ожидания начала ЗАГРУЗКИ
+      function waitLoading(_xhr) {
+        return new Promise(function (resolve, reject) {
+          // Ожидать начала загрузки (или ошибки)
+          _xhr.addEventListener('readystatechange', function onWaitLoading() {
+            if (_xhr.readyState < 4) { // Loading
+              resolve(_xhr);
+            } else if (_xhr.readyState === 4 && _xhr.status !== 200) { // Error
+              reject();
+            }
+            fOnWaitLoading = onWaitLoading; // Сохранить функцию, чтобы можно было потом отписаться
+          });
+        });
+      }
 
-      req.addEventListener('readystatechange', () => {
-        if (req.readyState < 4) {
+      // Функция создатель промиса ожидания успешного получения ОТВЕТА на запрос
+      function waitDone(_xhr) {
+        return new Promise(function (resolve, reject) {
+          // Отписать предыдущий обработчик события (он не нужен больше)
+          if (typeof fOnWaitLoading == 'function') {
+            _xhr.removeEventListener('readystatechange', fOnWaitLoading);
+          }
+          // Ожидать успешного окончания запроса (или ошибки)
+          _xhr.addEventListener('readystatechange', function onWaitDone() {
+            if (_xhr.readyState === 4) { // Done ждать ТОЛЬКО readyState 4
+              if (_xhr.status === 200) { // Done OK
+                resolve(_xhr);
+              } else { // Done Error
+                reject();
+              }
+            }
+            fOnWaitDone = onWaitDone; // Сохранить функцию, чтобы можно было потом отписаться
+          });
+        });
+      }
+
+      // Функция послания запроса (возвращает промис ожидания начала загрузки)
+      function sendRequest(_data) {
+        let xhr = new XMLHttpRequest();
+        let prom = waitLoading(xhr);    // Создание промиса ожидания начала загрузки
+        // Послать запрос
+        //xhr.open('POST', 'http://yoga.local/server.php'); // Для openserver в другом домене и кросс-доменными запросами
+        xhr.open('POST', 'server.php'); // Для случая, когда и страница и php в одном домене
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send(_data);
+
+        return prom;
+      }
+
+      // Запуск цепочки промисов ajax запроса:
+      let message = {
+        loading: 'Загрузка',
+        success: 'Спасибо! Скоро мы с вами свяжемся!',
+        failure: 'Что-то пошло не так...'
+      };
+
+      sendRequest(new FormData(form)) // Создание промиса ожидания начала загрузки
+        .then((_xhr) => { // Загрузка ответа на запрос пошла
+          console.log("Loading");
           statusMessage.querySelector('.status').textContent = message.loading;
-          statusMessage.querySelector('.requestStatus-img').style.backgroundImage ="url('icons/loader.gif')";
-          
-        } else if (req.readyState === 4 && req.status === 200) {
+          statusMessage.querySelector('.requestStatus-img').style.backgroundImage = "url('icons/loader.gif')";
+          return waitDone(_xhr); // Создать и вернуть промис ожидания окончания запроса
+        })
+        .then((_xhr) => { // Загрузка завершена
+          console.log("OK");
           statusMessage.querySelector('.status').textContent = message.success;
-          statusMessage.querySelector('.requestStatus-img').style.backgroundImage ="url('icons/ok.svg')";
-        } else {
+          statusMessage.querySelector('.requestStatus-img').style.backgroundImage = "url('icons/ok.svg')";
+
+          // Отписаться от ненужных обработчиков события (но это не обязательно)
+          if (typeof fOnWaitDone == 'function') {
+            _xhr.removeEventListener('readystatechange', fOnWaitDone);
+          }
+        })
+        .catch(() => { // Если что-то на каком-то этапе пошло не так
+          console.log("Error");
           statusMessage.querySelector('.status').textContent = message.failure;
-          statusMessage.querySelector('.requestStatus-img').style.backgroundImage ="url('icons/error.svg')";
-        }
-      });
+          statusMessage.querySelector('.requestStatus-img').style.backgroundImage = "url('icons/error.svg')";
+        })
+        .then(() => { // Finally действия после всего
+          clearInputs(form);
+        });
 
-      //req.open('POST', 'http://yoga.local/server.php'); // Для openserver в другом домене и кросс-доменными запросами
-       req.open('POST','server.php'); // Для случая, когда и страница и php в одном домене
+    });
 
-      // Обычная форма
-      req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      let formData = new FormData(form);
-      req.send(formData);
-
-      // JSON файлы
-      //req.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-      // Если ругается но ошибку кроссдоменных запросов (из-за 'application/json; charset=utf-8')
-      //, то можно req.setRequestHeader('Content-Type', 'text/plain;charset=UTF-8'); или убрать её
-      let obj = {};
-      formData.forEach((value, key) => {
-        obj[key] = value;
-      });
-      let strJSON = JSON.stringify(obj);
-      //req.send(strJSON);
-
-
+    function clearInputs(_form) {
+      let inputs = _form.getElementsByTagName('input');
       for (let i = 0; i < inputs.length; i++) {
         inputs[i].value = '';
       }
-    });
+    }
+
   });
 
+
+
   let maskPhone = "+7 (___) ___ __ __"; // Маска ввода
-  document.querySelectorAll('input[type=tel]').forEach((tel)=>{
+  document.querySelectorAll('input[type=tel]').forEach((tel) => {
     initPhoneMask(tel, maskPhone);
   });
 
@@ -82,7 +138,7 @@ window.addEventListener('DOMContentLoaded', () => {
     _element.addEventListener('blur', process);
 
     function process(e) {
-            
+
       let matrix = _mask; // Маска ввода
       let def = matrix.replace(/\D/g, ""),
         val = _element.value.replace(/\D/g, "");
@@ -93,7 +149,7 @@ window.addEventListener('DOMContentLoaded', () => {
       let iNum = 0,
         cursorPos = 0,
         im = 0;
-        _element.value = matrix.replace(/./g, function (a) {
+      _element.value = matrix.replace(/./g, function (a) {
 
         let numberPlace = /[_\d]/.test(a);
         let ch = "";
