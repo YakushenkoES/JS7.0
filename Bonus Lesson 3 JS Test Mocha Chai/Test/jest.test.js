@@ -26,7 +26,7 @@ describe("Функция each", function () {
   let res = script.each(input, script.myFunc);
 
   it('Проверка на возвращаемый тип "массив"', function () {
-    expect(typeof res).toBe('array');
+    expect(Array.isArray(res)).toBeTruthy();
   });
 
 
