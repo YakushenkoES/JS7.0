@@ -1,0 +1,19 @@
+{
+  "scripts": {
+    "test": "jest"
+  },
+  "name": "test",
+  "version": "1.0.0",
+  "main": "script.js",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "g": "^2.0.1",
+    "jest": "^24.8.0"
+  },
+  "devDependencies": {
+    "mocha": "^6.1.4"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
