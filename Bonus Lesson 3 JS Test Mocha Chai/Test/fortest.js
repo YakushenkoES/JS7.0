@@ -1,3 +1,5 @@
+let expect = require('chai').expect;
+
 // Функция sum должна возвращать тип данных true. Проверить её на это.
 
 function sum(a, b) {

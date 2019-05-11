@@ -29,20 +29,19 @@ window.addEventListener('DOMContentLoaded', () => {
     // Обработать событие отправки формы
     form.addEventListener('submit', function (e) {
       e.preventDefault(); // Отключение событий по умолчанию для ajax запроса
-      let fOnWaitLoading, fOnWaitDone; // Переменные для функций обработки 'readystatechange'
-      // нужны, чтобы их можно было потом "отписать" от события
-
+     
       // Функция создатель промиса ожидания начала ЗАГРУЗКИ
       function waitLoading(_xhr) {
         return new Promise(function (resolve, reject) {
           // Ожидать начала загрузки (или ошибки)
           _xhr.addEventListener('readystatechange', function onWaitLoading() {
+
             if (_xhr.readyState < 4) { // Loading
+              _xhr.removeEventListener('readystatechange', onWaitLoading); // Отписать ЭТОТ обработчик события, он больше не нужен
               resolve(_xhr);
             } else if (_xhr.readyState === 4 && _xhr.status !== 200) { // Error
               reject();
             }
-            fOnWaitLoading = onWaitLoading; // Сохранить функцию, чтобы можно было потом отписаться
           });
         });
       }
@@ -50,21 +49,19 @@ window.addEventListener('DOMContentLoaded', () => {
       // Функция создатель промиса ожидания успешного получения ОТВЕТА на запрос
       function waitDone(_xhr) {
         return new Promise(function (resolve, reject) {
-          // Отписать предыдущий обработчик события (он не нужен больше)
-          if (typeof fOnWaitLoading == 'function') {
-            _xhr.removeEventListener('readystatechange', fOnWaitLoading);
-          }
+
           // Ожидать успешного окончания запроса (или ошибки)
           _xhr.addEventListener('readystatechange', function onWaitDone() {
             if (_xhr.readyState === 4) { // Done ждать ТОЛЬКО readyState 4
               if (_xhr.status === 200) { // Done OK
+                _xhr.removeEventListener('readystatechange', onWaitDone); // Отписать ЭТОТ обработчик события, он больше не нужен
                 resolve(_xhr);
               } else { // Done Error
                 reject();
               }
             }
-            fOnWaitDone = onWaitDone; // Сохранить функцию, чтобы можно было потом отписаться
           });
+
         });
       }
 
@@ -99,11 +96,6 @@ window.addEventListener('DOMContentLoaded', () => {
           console.log("OK");
           statusMessage.querySelector('.status').textContent = message.success;
           statusMessage.querySelector('.requestStatus-img').style.backgroundImage = "url('icons/ok.svg')";
-
-          // Отписаться от ненужных обработчиков события (но это не обязательно)
-          if (typeof fOnWaitDone == 'function') {
-            _xhr.removeEventListener('readystatechange', fOnWaitDone);
-          }
         })
         .catch(() => { // Если что-то на каком-то этапе пошло не так
           console.log("Error");
