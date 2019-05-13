@@ -18,9 +18,10 @@ window.addEventListener('DOMContentLoaded', () => {
       n = slides.length + (n % slides.length);
     }
     if (n > slides.length) {
-      n = n % slides.length;
+      n = (n - 1) % slides.length + 1;
     }
     slideIndex = n;
+    console.log(slideIndex);
 
     slides.forEach((item) => item.style.display = 'none');
     dots.forEach((item) => item.classList.remove('dot-active'));
@@ -40,7 +41,7 @@ window.addEventListener('DOMContentLoaded', () => {
     nextSlide(-1);
   });
   next.addEventListener('click', function () {
-    nextSlide(5);
+    nextSlide(1);
   });
 
   dotsWrap.addEventListener('click', function (e) {
@@ -65,18 +66,20 @@ window.addEventListener('DOMContentLoaded', () => {
     totalValue = document.getElementById('total'),
     personsSum,
     daysSum,
+    total = 0,
+    preTotal = 0,
     coeff = getPlaceCoeff();
 
   totalValue.textContent = 0;
 
   days.addEventListener('input', function () {
     this.value = prepareValue(this.value);
-    daysSum = this.value.length?+this.value:undefined;
+    daysSum = this.value.length ? +this.value : undefined;
     calcTotal();
   });
   persons.addEventListener('input', function () {
     this.value = prepareValue(this.value);
-    personsSum = this.value.length?+this.value:undefined;
+    personsSum = this.value.length ? +this.value : undefined;
     calcTotal();
   });
 
@@ -86,12 +89,46 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   function calcTotal() {
-    let res = (daysSum * personsSum) * 1000 * coeff;
-    if (isNaN(res)) {
-      totalValue.textContent = 0;
-    } else {
-      totalValue.textContent = res;
+    preTotal = total;
+    total = (daysSum * personsSum) * 1000 * coeff;
+    if (isNaN(total)) {
+      total = 0;
     }
+    animate({
+      duration: 1000,
+      timing: easeInOutCubic,
+      draw: drawCalcRes
+    });
+  }
+  // Animation
+  function drawCalcRes(progress) {
+    let from = preTotal;
+    let to = total;
+    let delta = to - from;
+    totalValue.textContent = Math.round((from+delta* progress)/100 )*100;
+  }
+
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+  }
+
+  function animate(options) {
+    let start = performance.now();
+
+    requestAnimationFrame(function anim(time) {
+      let timeFraction = (performance.now() - start) / options.duration;
+      if (timeFraction > 1) {
+        timeFraction = 1;
+      }
+
+      let progress = options.timing(timeFraction);
+      options.draw(progress);
+
+
+      if (timeFraction < 1) {
+        requestAnimationFrame(anim);
+      }
+    });
   }
 
 
