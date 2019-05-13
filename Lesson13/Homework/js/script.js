@@ -21,13 +21,30 @@ window.addEventListener('DOMContentLoaded', () => {
       n = (n - 1) % slides.length + 1;
     }
     slideIndex = n;
-    console.log(slideIndex);
-
+    
     slides.forEach((item) => item.style.display = 'none');
     dots.forEach((item) => item.classList.remove('dot-active'));
     slides[n - 1].style.display = 'block';
     dots[n - 1].classList.add('dot-active');
+
+
+    function drawSlider(progress){
+
+      slides[n - 1].style.filter=`sepia(${(1-progress)*100}%)`;
+      let rt=-10*(1-progress);
+      slides[n - 1].style.transform =`rotateY(${rt}deg) rotateX(${rt}deg)` ;
+  
+    }
+    animate({
+      duration: 2000,
+      timing: easeInOutCubic,
+      draw: drawSlider
+    });
   }
+
+  
+
+
 
   function nextSlide(n) {
     showSlide(slideIndex + n);
