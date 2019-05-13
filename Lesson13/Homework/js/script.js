@@ -13,12 +13,12 @@ window.addEventListener('DOMContentLoaded', () => {
   showSlide(slideIndex);
 
   function showSlide(n) {
-    // Check and correct indexes
+    // Check and correct selected slide index
     if (n < 1) {
       n = slides.length + (n % slides.length);
     }
     if (n > slides.length) {
-      n = n % slides.length ;
+      n = n % slides.length;
     }
     slideIndex = n;
 
@@ -55,42 +55,44 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Calculator ___________________________
 
+  let prepareValue = val => val.replace(/^0+|[^0-9]+/g, ""); // Убрать все не цифры и нули в начале} 
+  let getPlaceCoeff = () => place.options[place.selectedIndex].value;
+
   let calculatorInputs = document.querySelectorAll('.counter-block-input'),
     persons = calculatorInputs[0],
     days = calculatorInputs[1],
     place = document.getElementById('select'),
     totalValue = document.getElementById('total'),
-    personsSum = 0,
-    daysSum = 0,
-    total = 0;
+    personsSum,
+    daysSum,
+    coeff = getPlaceCoeff();
 
-    totalValue.textContent = 0;
+  totalValue.textContent = 0;
 
-    persons.addEventListener('change', function(){
-      personsSum = +this.value;
-      total = (daysSum + personsSum)*4000;
+  days.addEventListener('input', function () {
+    this.value = prepareValue(this.value);
+    daysSum = this.value.length?+this.value:undefined;
+    calcTotal();
+  });
+  persons.addEventListener('input', function () {
+    this.value = prepareValue(this.value);
+    personsSum = this.value.length?+this.value:undefined;
+    calcTotal();
+  });
 
-      if(days.value == ''){
-        totalValue.textContent = 0;
-      }else{
-        totalValue.textContent = total;
-      }
-    });
-    days.addEventListener('change', function(){
-      daysSum = +this.value;
-      total = (daysSum + personsSum)*4000;
+  place.addEventListener('change', () => {
+    coeff = getPlaceCoeff();
+    calcTotal();
+  });
 
-      if(persons.value == ''){
-        totalValue.textContent = 0;
-      }else{
-        totalValue.textContent = total;
-      }
-    });
-    place.addEventListener('change', function(){
-      let coeff = this.options[this.selectedIndex].value;
-      totalValue.textContent = total*coeff;
-    });
-
+  function calcTotal() {
+    let res = (daysSum * personsSum) * 1000 * coeff;
+    if (isNaN(res)) {
+      totalValue.textContent = 0;
+    } else {
+      totalValue.textContent = res;
+    }
+  }
 
 
 
