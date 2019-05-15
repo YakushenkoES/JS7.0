@@ -70,7 +70,6 @@ $(document).ready(function () {
   $('.contactform_select').on('submit', function (e) {
     e.preventDefault();
     let fdata = new FormData($(this)[0]);
-    console.log(fdata.get('phone'));
     $.ajax({
       url: 'server.php',
       method: "POST",
