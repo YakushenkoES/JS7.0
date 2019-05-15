@@ -72,7 +72,7 @@ $(document).ready(function () {
     let fdata = new FormData(document.forms[0]);
     fdata = new FormData($(this)[0]);
     $.ajax({
-      url: 'http://yoga.local/server.php',
+      url: 'server.php',
       method: "POST",
       contentType: "application/x-www-form-urlencoded",
       data: fdata,
