@@ -3,7 +3,7 @@ class Animation {
 
   animate(options) {
     let start = performance.now();
-    requestAnimationFrame(function anim(time) {
+    requestAnimationFrame(function anim() {
       let timeFraction = (performance.now() - start) / options.duration;
       if (timeFraction > 1) {
         timeFraction = 1;

@@ -1844,7 +1844,7 @@ function () {
     key: "animate",
     value: function animate(options) {
       var start = performance.now();
-      requestAnimationFrame(function anim(time) {
+      requestAnimationFrame(function anim() {
         var timeFraction = (performance.now() - start) / options.duration;
 
         if (timeFraction > 1) {
@@ -1971,7 +1971,8 @@ function forms(forms) {
     var text = document.createElement('div');
     var img = document.createElement('div');
     div.classList.add('requestStatus');
-    text.classList.add('status', 'requestStatus-status');
+    text.classList.add('status');
+    text.classList.add('requestStatus-status');
     img.classList.add('requestStatus-img');
     div.appendChild(img);
     div.appendChild(text);
@@ -2032,13 +2033,22 @@ function forms(forms) {
       function sendRequest(_data) {
         var xhr = new XMLHttpRequest();
         var prom = waitLoading(xhr); // Создание промиса ожидания начала загрузки
-        // Послать запрос
-        //xhr.open('POST', 'http://yoga.local/server.php'); // Для openserver в другом домене и кросс-доменными запросами
 
         xhr.open('POST', 'server.php'); // Для случая, когда и страница и php в одном домене
 
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.send(_data);
+        xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+        var obj = {};
+
+        _data.forEach(function (value, key) {
+          if (key == 'phone' || key == 'tel') {
+            obj[key] = value.replace(/[\( \)_]/g, "");
+          } else {
+            obj[key] = value;
+          }
+        });
+
+        var strJSON = JSON.stringify(obj);
+        xhr.send(strJSON);
         return prom;
       } // Запуск цепочки промисов ajax запроса:
 
@@ -2051,18 +2061,15 @@ function forms(forms) {
       sendRequest(new FormData(form)) // Создание промиса ожидания начала загрузки
       .then(function (_xhr) {
         // Загрузка ответа на запрос пошла
-        console.log("Loading");
         statusMessage.querySelector('.status').textContent = message.loading;
         statusMessage.querySelector('.requestStatus-img').style.backgroundImage = "url('icons/loader.gif')";
         return waitDone(_xhr); // Создать и вернуть промис ожидания окончания запроса
       }).then(function (_xhr) {
         // Загрузка завершена
-        console.log("OK");
         statusMessage.querySelector('.status').textContent = message.success;
         statusMessage.querySelector('.requestStatus-img').style.backgroundImage = "url('icons/ok.svg')";
       }).catch(function () {
         // Если что-то на каком-то этапе пошло не так
-        console.log("Error");
         statusMessage.querySelector('.status').textContent = message.failure;
         statusMessage.querySelector('.requestStatus-img').style.backgroundImage = "url('icons/error.svg')";
       }).then(function () {
@@ -2109,7 +2116,7 @@ function maskInputPhone(inputs) {
 
     _element.addEventListener('blur', process);
 
-    function process(e) {
+    function process() {
       var matrix = _mask; // Маска ввода
 
       var def = matrix.replace(/\D/g, ""),

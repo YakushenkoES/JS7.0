@@ -6,7 +6,8 @@
      let text = document.createElement('div');
      let img = document.createElement('div');
      div.classList.add('requestStatus');
-     text.classList.add('status', 'requestStatus-status');
+     text.classList.add('status');
+     text.classList.add('requestStatus-status');
      img.classList.add('requestStatus-img');
      div.appendChild(img);
      div.appendChild(text);
@@ -62,11 +63,19 @@
        function sendRequest(_data) {
          let xhr = new XMLHttpRequest();
          let prom = waitLoading(xhr); // Создание промиса ожидания начала загрузки
-         // Послать запрос
-         //xhr.open('POST', 'http://yoga.local/server.php'); // Для openserver в другом домене и кросс-доменными запросами
          xhr.open('POST', 'server.php'); // Для случая, когда и страница и php в одном домене
-         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-         xhr.send(_data);
+         xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+
+         let obj = {};
+         _data.forEach((value, key) => {
+           if (key == 'phone' || key == 'tel') {
+             obj[key] = value.replace(/[\( \)_]/g, "");
+           } else {
+             obj[key] = value;
+           }
+         });
+         let strJSON = JSON.stringify(obj);
+         xhr.send(strJSON);
 
          return prom;
        }
@@ -80,18 +89,15 @@
 
        sendRequest(new FormData(form)) // Создание промиса ожидания начала загрузки
          .then((_xhr) => { // Загрузка ответа на запрос пошла
-           console.log("Loading");
            statusMessage.querySelector('.status').textContent = message.loading;
            statusMessage.querySelector('.requestStatus-img').style.backgroundImage = "url('icons/loader.gif')";
            return waitDone(_xhr); // Создать и вернуть промис ожидания окончания запроса
          })
          .then((_xhr) => { // Загрузка завершена
-           console.log("OK");
            statusMessage.querySelector('.status').textContent = message.success;
            statusMessage.querySelector('.requestStatus-img').style.backgroundImage = "url('icons/ok.svg')";
          })
          .catch(() => { // Если что-то на каком-то этапе пошло не так
-           console.log("Error");
            statusMessage.querySelector('.status').textContent = message.failure;
            statusMessage.querySelector('.requestStatus-img').style.backgroundImage = "url('icons/error.svg')";
          })

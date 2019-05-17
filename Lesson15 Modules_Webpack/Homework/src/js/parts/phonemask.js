@@ -10,7 +10,7 @@ function maskInputPhone(inputs){
     _element.addEventListener('focus', process);
     _element.addEventListener('blur', process);
 
-    function process(e) {
+    function process() {
 
       let matrix = _mask; // Маска ввода
       let def = matrix.replace(/\D/g, ""),
