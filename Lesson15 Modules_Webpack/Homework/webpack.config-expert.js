@@ -1,8 +1,10 @@
 'use strict';
 let CopyWebpackPlugin = require('copy-webpack-plugin');
 let path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
+
   mode: 'development',
   entry: './src/js/script.js',
   output: {
@@ -12,6 +14,7 @@ module.exports = {
   watch: true,
 
   devtool: "source-map",
+
 
   module: {
     rules: [{
@@ -31,14 +34,10 @@ module.exports = {
               }
             }]
           ],
-          plugins: 
-            ["es6-promise"]           
+          plugins: ["es6-promise"]
           
-
-
-
-
         }
+       
       }
     }]
   }

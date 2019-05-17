@@ -15,7 +15,7 @@ import slider from './parts/slider';
 import forms from './parts/forms';
 
 window.addEventListener('DOMContentLoaded', () => {
-
+ 
   'use strict';
  
   tabs(document.querySelector(".info"));
