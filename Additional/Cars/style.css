@@ -1,0 +1,74 @@
+html {
+  font-family: Arial, serif;
+  font-size: 16px;
+  color: #2a2a2a; }
+
+h1 {
+  font-size: 4rem;
+  text-align: center; }
+
+.cars {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start; }
+  .cars-controls {
+    text-align: center; }
+    .cars-controls select {
+      width: auto;
+      font-size: 1.3rem;
+      padding: 10px;
+      border-radius: 3px; }
+  .cars .car {
+    -ms-flex-preferred-size: 600px;
+    flex-basis: 600px;
+    margin: 20px;
+    padding: 20px;
+    border: solid 1px #DDD;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
+    .cars .car-header {
+      text-align: center;
+      text-transform: uppercase; }
+    .cars .car-image {
+      -o-object-fit: cover;
+      object-fit: cover;
+      -o-object-position: center;
+      object-position: center;
+      height: 400px;
+      width: calc(100% - 10px);
+      -ms-flex-line-pack: center;
+      align-content: center;
+      margin: 5px; }
+    .cars .car-param {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+      flex-direction: row;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      width: 200px;
+      margin: 5px;
+      font-size: 1.2rem; }
+      .cars .car-param-label {
+        margin-right: 10px; }
+      .cars .car-param-value {
+        font-weight: 700; }
+    .cars .car-desc {
+      font-size: 1.1rem;
+      margin: 5px;
+      padding: 5px;
+      margin-top: 2rem; }
