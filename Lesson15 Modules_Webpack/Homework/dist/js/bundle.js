@@ -1829,31 +1829,45 @@ module.exports = g;
 __webpack_require__.r(__webpack_exports__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Animation = function Animation() {
-  _classCallCheck(this, Animation);
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-  this.animate = function (options) {
-    var start = performance.now();
-    requestAnimationFrame(function anim(time) {
-      var timeFraction = (performance.now() - start) / options.duration;
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-      if (timeFraction > 1) {
-        timeFraction = 1;
-      }
+var Animation =
+/*#__PURE__*/
+function () {
+  function Animation() {
+    _classCallCheck(this, Animation);
+  }
 
-      var progress = options.timing(timeFraction);
-      options.draw(progress);
+  _createClass(Animation, [{
+    key: "animate",
+    value: function animate(options) {
+      var start = performance.now();
+      requestAnimationFrame(function anim(time) {
+        var timeFraction = (performance.now() - start) / options.duration;
 
-      if (timeFraction < 1) {
-        requestAnimationFrame(anim);
-      }
-    });
-  };
+        if (timeFraction > 1) {
+          timeFraction = 1;
+        }
 
-  this.easeInOutCubic = function (t) {
-    return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
-  };
-};
+        var progress = options.timing(timeFraction);
+        options.draw(progress);
+
+        if (timeFraction < 1) {
+          requestAnimationFrame(anim);
+        }
+      });
+    }
+  }, {
+    key: "easeInOutCubic",
+    value: function easeInOutCubic(t) {
+      return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+    }
+  }]);
+
+  return Animation;
+}();
 
 /* harmony default export */ __webpack_exports__["default"] = (Animation);
 
