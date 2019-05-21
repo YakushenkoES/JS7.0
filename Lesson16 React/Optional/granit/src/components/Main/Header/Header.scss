@@ -1,0 +1,112 @@
+@import '../Variables.scss';
+
+.header {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  height: $header-height;
+  padding-top: 3rem;
+
+  
+
+  .logo {
+    &-img {
+      display: inline-block;
+      height: 4rem;
+      margin-right: 1.4rem;
+    }
+
+    &-title {
+      display: inline-block;
+      height: 4rem;
+
+      &-main {
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: 2.2rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+
+        color: $clr-text;
+      }
+
+      &-text {
+        font-size: 1.1rem;
+        font-weight: 300;
+        line-height: 2.2rem;
+        color: $clr-text-light;
+      }
+    }
+  }
+
+  .contacts {
+    display: flex;
+    justify-content: flex-end;
+
+    &-phone {
+      color: $clr-text;
+      margin-right: 3rem;
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 2.2rem;
+      text-transform: uppercase;
+      text-align: right;
+
+
+
+      &-desc {
+        font-size: 1.1rem;
+        font-weight: 400;
+        line-height: 2.2rem;
+        color: $clr-text-light;
+        text-transform: none;
+      }
+    }
+
+    &-call {
+      .btn-call {
+        width: 16rem;
+        height: 4rem;
+        border: 2px solid $clr-text;
+        color: $clr-text;
+        background-color: #fff;
+        font-size: 1.2rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+
+        &:hover {
+          border: 2px solid lighten($clr-text, 20);
+          color: lighten($clr-text, 20);
+        }
+
+        &:active {
+          color: #fff;
+          background-color: $clr-text;
+          border-color: $clr-text;
+        }
+      }
+    }
+  }
+
+
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-around;
+  position: absolute;
+  bottom: 0;
+  height: 6rem;
+  background-color: $clr-bg;
+  transform: translateY(50%);
+
+  a {
+    color: $clr-nav;
+    font-size: 1.4rem;
+    font-weight: bold;
+    line-height: 2.2rem;
+  }
+}

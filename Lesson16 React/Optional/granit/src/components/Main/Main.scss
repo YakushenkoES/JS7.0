@@ -1,0 +1,97 @@
+@import '../Variables.scss';
+@include font-face('font', '../../fonts/GothamPro', normal, normal);
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Gotham Pro";
+}
+
+.content {
+  width: 940px;
+  margin: 0 auto;
+}
+
+html {
+  font-size: 10px;
+}
+
+.btn {
+  outline: none;
+  border: none;
+
+  &:active {
+    outline: none;
+  }
+}
+
+a {
+  color: $clr-text;
+  text-decoration: none;
+
+  &:hover {
+    color: lighten($clr-text, 20);
+  }
+}
+
+.main {
+  background: url('../../img/bg.png') center center no-repeat;
+  background-size: cover;
+  height: calc(100vh - #{$header-height});
+  color: $clr-text-main;
+
+
+  &-content {
+    padding-top: 17rem;
+  }
+
+  &-header {
+    font-size: 3.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 4rem;
+
+    &-desc {
+      margin-bottom: 6.5rem;
+      font-size: 1.4rem;
+      font-weight: 300;
+      line-height: 1.8;
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+
+  &-action {
+    &-btn {
+      height: 50px;
+      padding: 2rem 3rem;
+      margin-right: 3rem;
+      background-color: $clr-main-btn-bg;
+      color: $clr-main-text;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    span {
+      font-size: 1.2rem;
+      font-weight: bold;
+      line-height: 2.2rem;
+    }
+
+    a {
+      margin-left: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      line-height: 2.2rem;
+      text-decoration: underline;
+      color: $clr-text-main;
+
+      &:hover {
+        color: darken($clr-text-main, 20);
+      }
+    }
+  }
+}
