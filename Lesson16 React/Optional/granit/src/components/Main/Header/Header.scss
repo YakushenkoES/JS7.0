@@ -1,9 +1,10 @@
-@import '../Variables.scss';
+@import '../../Variables.scss';
 
 .header {
   box-sizing: border-box;
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   height: $header-height;
   padding-top: 3rem;
@@ -42,6 +43,7 @@
 
   .contacts {
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-end;
 
     &-phone {
@@ -94,6 +96,7 @@
 
 .main-nav {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   width: 100%;
   justify-content: space-around;

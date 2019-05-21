@@ -1,10 +1,7 @@
 import React from 'react';
 import NavItem from './NavItem';
 class Nav extends React.Component{
-  constructor(props){
-    super(props);
-  }
-
+ 
   render(){
     return(
       <nav className='main-nav'>

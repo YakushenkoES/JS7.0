@@ -1,10 +1,7 @@
 import React from 'react';
 import NavItem from './Header/NavItem'
 class MainContent extends React.Component{
-  constructor(props){
-    super(props);
-  }
-
+  
   render(){
     return(
       <div className="main">
