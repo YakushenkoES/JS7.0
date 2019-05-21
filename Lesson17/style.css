@@ -1,0 +1,53 @@
+html {
+  font-family: Arial, sans-serif;
+}
+
+
+/* Tabs */
+.tabs__content {
+  display: none;
+  /* по умолчанию прячем все блоки */
+  border: solid 1px #BBB;
+  padding: 10px;
+  max-width: 1200px;
+  height: 700px;
+}
+
+.tabs__content.active {
+  display: block;
+  /* по умолчанию показываем нужный блок */
+}
+
+.tabs__caption {
+  display: flex;
+  list-style-type: none;
+  margin-bottom: -2px;
+  z-index: 1;
+}
+
+.tabs__caption li {
+  font-size: 16px;
+  padding: 5px 10px;
+  border: solid 1px #BBB;
+  background-color: #CCC;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: none;
+}
+
+.tabs__caption li.active {
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #FFF;
+  border-bottom: solid 1px #fff;
+  ;
+}
+
+
+/* Gallerea */
+.galleria {
+  max-width: 700px;
+  height: 400px;
+  background: #000
+}
+

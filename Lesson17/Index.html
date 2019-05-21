@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./lib/accordion/css/style.css">
+</head>
+
+<body>
+  <h1>Готовые решения</h1>
+  <div class="tabs">
+    <ul class="tabs__caption">
+      <li class="active">Слайдер</li>
+      <li>Аккордион</li>
+      <li>Вкладка3</li>
+    </ul>
+
+    <div class="tabs__content active">
+      <div class="galleria">
+        <img src="./img/1.jpg">
+        <img src="./img/2.jpg">
+        <img src="./img/3.jpg">
+        <img src="./img/4.jpg">
+      </div>
+    </div>
+    <div class="tabs__content">
+      <div class="accordion">
+        <div class="trigger">
+          <input type="checkbox" id="checkbox-1" name="checkbox-1" />
+          <label for="checkbox-1" class="checkbox">
+            This is a Test <i></i>
+          </label>
+          <div class="content">
+            <h3>Gary Busey 2020!</h3>
+            <p>The magic Indian is a mysterious spiritual force, and we're going to Cathedral Rock, and that's the vortex of the heart.You ever roasted doughnuts?These kind of things only happen for the first time once.Did you feel that? Look at me - I'm not out of breath anymore! 
+      
+            <p>When you get lost in your imaginatory vagueness, your foresight will become a nimble vagrant.You ever roasted doughnuts?These kind of things only happen for the first time once.You gotta go through it to see there ain't nothing to it.It's good to yell at people and tell people that you're from Tennesee, so that way you'll be safe.</p>
+      
+            <p>The best way to communicate is compatible. Compatible communication is listening with open ears and an open mind, and not being fearful or judgemental about what you're hearing.Did you feel that? Look at me - I'm not out of breath anymore!These kind of things only happen for the first time once.</p>
+          </div>
+        </div>
+        
+        <div class="trigger">
+          <input type="checkbox" id="checkbox-2" name="checkbox-2" />
+          <label for="checkbox-2" class="checkbox">
+            This is a Test <i></i>
+          </label>
+          <div class="content">
+            <h3>Gary Busey 2020!</h3>
+            <p>The magic Indian is a mysterious spiritual force, and we're going to Cathedral Rock, and that's the vortex of the heart.You ever roasted doughnuts?These kind of things only happen for the first time once.Did you feel that? Look at me - I'm not out of breath anymore! 
+      
+            <p>When you get lost in your imaginatory vagueness, your foresight will become a nimble vagrant.You ever roasted doughnuts?These kind of things only happen for the first time once.You gotta go through it to see there ain't nothing to it.It's good to yell at people and tell people that you're from Tennesee, so that way you'll be safe.</p>
+      
+            <p>The best way to communicate is compatible. Compatible communication is listening with open ears and an open mind, and not being fearful or judgemental about what you're hearing.Did you feel that? Look at me - I'm not out of breath anymore!These kind of things only happen for the first time once.</p>
+          </div>
+        </div>
+        
+        <div class="trigger">
+          <input type="checkbox" id="checkbox-3" name="checkbox-3" />
+          <label for="checkbox-3" class="checkbox">
+            This is a Test <i></i>
+          </label>
+          <div class="content">
+            <h3>Gary Busey 2020!</h3>
+            <p>The magic Indian is a mysterious spiritual force, and we're going to Cathedral Rock, and that's the vortex of the heart.You ever roasted doughnuts?These kind of things only happen for the first time once.Did you feel that? Look at me - I'm not out of breath anymore! 
+      
+            <p>When you get lost in your imaginatory vagueness, your foresight will become a nimble vagrant.You ever roasted doughnuts?These kind of things only happen for the first time once.You gotta go through it to see there ain't nothing to it.It's good to yell at people and tell people that you're from Tennesee, so that way you'll be safe.</p>
+      
+            <p>The best way to communicate is compatible. Compatible communication is listening with open ears and an open mind, and not being fearful or judgemental about what you're hearing.Did you feel that? Look at me - I'm not out of breath anymore!These kind of things only happen for the first time once.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tabs__content">
+      Содержимое 3 блока</div>
+  </div>
+
+
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <script src="lib/galleria/galleria-1.5.7.min.js"></script>
+  <script>
+    (function () {
+      Galleria.loadTheme('./lib/galleria/themes/classic/galleria.classic.min.js');
+      Galleria.configure({
+        transition: 'fade',
+        imageCrop: true,
+        fullscreenCrop: true,
+        autoplay: 4000,
+        fullscreenDoubleTap: true,
+        height: 600,
+        width: 800,
+        lightbox: true
+    
+      });
+      Galleria.run('.galleria');
+    }());
+  </script>
+<script src="./lib/accordion/js/index.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
