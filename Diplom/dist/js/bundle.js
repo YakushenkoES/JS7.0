@@ -429,20 +429,81 @@ module.exports = g;
 
 /***/ }),
 
-/***/ "./src/js/modules/slider.js":
-/*!**********************************!*\
-  !*** ./src/js/modules/slider.js ***!
-  \**********************************/
+/***/ "./src/js/modules/mainSlider.js":
+/*!**************************************!*\
+  !*** ./src/js/modules/mainSlider.js ***!
+  \**************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function slider() {
-  console.log("I'm slider");
+function mainSlider() {
+  var page = document.querySelector('.page'),
+      btnsNext = Array.from(page.querySelectorAll('.next')),
+      pageParts = Array.from(page.children),
+      logos = page.querySelectorAll('.page-part .sidecontrol > a:first-child'),
+      N = pageParts.length; // Кнопки перехода на следующую страницу
+
+  page.addEventListener('click', function (e) {
+    var currbtn;
+
+    function isNextBtn(el) {
+      while (el !== null) {
+        if (el.matches('.next')) {
+          return el;
+        } else {
+          el = el.parentElement;
+        }
+      }
+    }
+
+    if (e.target && (currbtn = isNextBtn(e.target))) {
+      var nextInd = btnsNext.indexOf(currbtn) + 1;
+
+      if (nextInd >= N) {
+        nextInd = 0;
+      }
+
+      showPagePart(nextInd);
+    } // Нажатие на логотип
+
+
+    logos.forEach(function (el) {
+      el.addEventListener('click', function () {
+        showPagePart(0);
+      });
+    });
+
+    function showPagePart(ind) {
+      if (ind < 0 || ind > N - 1) {
+        ind = 0;
+      }
+
+      function show(part) {
+        if (part != page.children[0]) {
+          page.insertBefore(part, page.children[0]);
+        }
+
+        part.classList.add('page-part-active');
+      }
+
+      function hide(part) {
+        part.classList.remove('page-part-active');
+      }
+
+      pageParts.forEach(function (_part, _i) {
+        if (ind == _i) {
+          show(_part);
+        } else {
+          hide(_part);
+        }
+      });
+    }
+  });
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (slider);
+/* harmony default export */ __webpack_exports__["default"] = (mainSlider);
 
 /***/ }),
 
@@ -461,8 +522,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var formdata_polyfill__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(formdata_polyfill__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var element_matches_polyfill__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! element-matches-polyfill */ "./node_modules/element-matches-polyfill/index.js");
 /* harmony import */ var element_matches_polyfill__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(element_matches_polyfill__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
- // npx webpack --config webpack.config-expert.js
+/* harmony import */ var _modules_mainSlider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/mainSlider */ "./src/js/modules/mainSlider.js");
+
 
 
 
@@ -470,7 +531,7 @@ __webpack_require__.r(__webpack_exports__);
 if (!Array.from) Array.from = __webpack_require__(/*! array-from */ "./node_modules/array-from/index.js");
 
 document.addEventListener('DOMContentLoaded', function () {
-  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_3__["default"])();
+  Object(_modules_mainSlider__WEBPACK_IMPORTED_MODULE_3__["default"])();
 });
 
 /***/ })

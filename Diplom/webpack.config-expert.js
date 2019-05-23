@@ -1,4 +1,7 @@
 'use strict';
+
+// npx webpack --config webpack.config-expert.js
+
 let path = require('path');
 
 module.exports = {
