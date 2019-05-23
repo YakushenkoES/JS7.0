@@ -470,7 +470,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _showPagePart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./showPagePart */ "./src/js/modules/showPagePart.js");
+/* harmony import */ var _showSlide__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./showSlide */ "./src/js/modules/showSlide.js");
 
 
 function mainSlider(_containerClass, _partClass) {
@@ -501,13 +501,13 @@ function mainSlider(_containerClass, _partClass) {
         nextInd = 0;
       }
 
-      Object(_showPagePart__WEBPACK_IMPORTED_MODULE_0__["default"])(page, _partClass, pageParts[nextInd]);
+      Object(_showSlide__WEBPACK_IMPORTED_MODULE_1__["default"])(page, _partClass, pageParts[nextInd]);
     } // Нажатие на логотип
 
 
     logos.forEach(function (el) {
       el.addEventListener('click', function () {
-        Object(_showPagePart__WEBPACK_IMPORTED_MODULE_0__["default"])(page, _partClass, pageParts[0]);
+        Object(_showSlide__WEBPACK_IMPORTED_MODULE_1__["default"])(page, _partClass, pageParts[0]);
       });
     });
   });
@@ -526,7 +526,7 @@ function mainSlider(_containerClass, _partClass) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _showPagePart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./showPagePart */ "./src/js/modules/showPagePart.js");
+/* harmony import */ var _showSlide__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./showSlide */ "./src/js/modules/showSlide.js");
 
 
 function modulesSlider(_containerClass, _partClass) {
@@ -556,7 +556,7 @@ function modulesSlider(_containerClass, _partClass) {
         }
       }
 
-      Object(_showPagePart__WEBPACK_IMPORTED_MODULE_0__["default"])(page, _partClass, pageParts[nextInd]);
+      Object(_showSlide__WEBPACK_IMPORTED_MODULE_1__["default"])(page, _partClass, pageParts[nextInd]);
     }
 
     function isNavBtn(el) {
@@ -575,16 +575,16 @@ function modulesSlider(_containerClass, _partClass) {
 
 /***/ }),
 
-/***/ "./src/js/modules/showPagePart.js":
-/*!****************************************!*\
-  !*** ./src/js/modules/showPagePart.js ***!
-  \****************************************/
+/***/ "./src/js/modules/showSlide.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/showSlide.js ***!
+  \*************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function showPagePart(page, _partClass, part) {
+function showSlide(page, _partClass, part) {
   var pageParts = Array.from(page.querySelectorAll(".".concat(_partClass)));
 
   function show(part) {
@@ -596,12 +596,12 @@ function showPagePart(page, _partClass, part) {
     part.classList.remove(_partClass + '-active');
   }
 
-  pageParts.forEach(function (_p, _i) {
+  pageParts.forEach(function (_p) {
     part == _p ? show(_p) : hide(_p);
   });
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (showPagePart);
+/* harmony default export */ __webpack_exports__["default"] = (showSlide);
 
 /***/ })
 

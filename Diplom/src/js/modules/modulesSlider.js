@@ -1,4 +1,4 @@
-import showPagePart from './showPagePart';
+import showSlide from './showSlide';
 
 function modulesSlider(_containerClass, _partClass) {
 
@@ -18,19 +18,19 @@ function modulesSlider(_containerClass, _partClass) {
                 if (nextInd >= N) {
                     nextInd = 0;
                 }
-            } else if(btnsPrev.includes(currbtn)){
+            } else if (btnsPrev.includes(currbtn)) {
                 nextInd = btnsPrev.indexOf(currbtn) - 1;
                 if (nextInd < 0) {
-                    nextInd = N-1;
+                    nextInd = N - 1;
                 }
             }
-            showPagePart(page, _partClass, pageParts[nextInd]);
+            showSlide(page, _partClass, pageParts[nextInd]);
         }
 
         function isNavBtn(el) {
             while (el !== null) {
                 if (el.matches('a.nextmodule, a.prevmodule')) {
-                    
+
                     return el;
                 } else {
                     el = el.parentElement;
