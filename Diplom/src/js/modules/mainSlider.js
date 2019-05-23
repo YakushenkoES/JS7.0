@@ -1,58 +1,42 @@
-function mainSlider() {
-  let page = document.querySelector('.page'),
-    btnsNext = Array.from(page.querySelectorAll('.next')),
+import showPagePart from './showPagePart';
+function mainSlider(_containerClass, _partClass) {
+  let page = document.querySelector(`.${_containerClass}`),
+    btnsNext = Array.from(page.querySelectorAll('a.next')),
     pageParts = Array.from(page.children),
-    logos = page.querySelectorAll('.page-part .sidecontrol > a:first-child'),
+    logos = page.querySelectorAll( `.${_partClass} .sidecontrol > a:first-child`),
     N = pageParts.length;
-
-    // Кнопки перехода на следующую страницу
+    // Нижние кнопки перехода на следующую часть страницы
   page.addEventListener('click', (e) => {
+
     let currbtn;
     function isNextBtn(el) {
       while (el !== null) {
-        if (el.matches('.next')) {
+        if (el.matches('a.next')) {
           return el;
         } else {
           el = el.parentElement;
         }
       }
     }
+
     if (e.target && (currbtn = isNextBtn(e.target))) {
+      e.preventDefault();
       let nextInd = btnsNext.indexOf(currbtn) + 1;
       if (nextInd >= N) {
         nextInd = 0;
-      }
-      showPagePart(nextInd);
+      } 
+     
+      showPagePart(page, _partClass, pageParts[nextInd]);
     }
+
     // Нажатие на логотип
     logos.forEach(el=>{
       el.addEventListener('click', ()=>{
-        showPagePart(0);
+        showPagePart(page, _partClass, pageParts[0]);
       });
     });
     
-    function showPagePart(ind) {
-      if (ind < 0 || ind > N - 1) {
-        ind = 0;
-      }
-      
-      function show(part){
-        if(part != page.children[0]){
-          page.insertBefore(part, page.children[0]);
-        }
-        part.classList.add('page-part-active');
-      }
-      function hide(part){
-        part.classList.remove('page-part-active');
-      }
-      pageParts.forEach( (_part, _i) => {
-        if(ind==_i){
-          show(_part);
-        }else{
-          hide(_part);
-        }
-      });
-    }
+   
   });
 }
 

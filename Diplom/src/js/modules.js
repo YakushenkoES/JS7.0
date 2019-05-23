@@ -6,8 +6,10 @@ import 'element-matches-polyfill';
 if (!Array.from) Array.from = require('array-from');
 
 import mainSlider from './modules/mainSlider';
+import modulesSlider from './modules/modulesSlider';
 
 
 document.addEventListener('DOMContentLoaded', ()=>{
-  mainSlider('page', 'page-part');
+  mainSlider('moduleapp', 'module');
+  modulesSlider('moduleapp', 'module');
 });

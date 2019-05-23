@@ -1418,10 +1418,16 @@ a {
       padding: 21px 66px 20px 66px; }
 
 .module {
+  opacity: 0.0;
+  -webkit-transition: all ease-in-out 1s;
+  -o-transition: all ease-in-out 1s;
+  transition: all ease-in-out 1s;
   position: relative;
   height: 100vh;
   padding-top: 0px;
   overflow: hidden; }
+  .module-active {
+    opacity: 1.0; }
   .module .regular {
     font-weight: normal; }
   .module .title {

@@ -7,9 +7,12 @@ let path = require('path');
 module.exports = {
 
   mode: 'development',// 'production'
-  entry: './src/js/script.js',
+  entry: {
+    index: './src/js/script.js',
+    modules: './src/js/modules.js'
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].js',
     path: __dirname + '/dist/js'
   },
   watch: true,
