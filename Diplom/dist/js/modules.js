@@ -470,7 +470,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _showSlide__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./showSlide */ "./src/js/modules/showSlide.js");
+/* harmony import */ var _showSlide__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./showSlide */ "./src/js/modules/showSlide.js");
 
 
 function mainSlider(_containerClass, _partClass) {
@@ -501,13 +501,13 @@ function mainSlider(_containerClass, _partClass) {
         nextInd = 0;
       }
 
-      Object(_showSlide__WEBPACK_IMPORTED_MODULE_1__["default"])(page, _partClass, pageParts[nextInd]);
+      Object(_showSlide__WEBPACK_IMPORTED_MODULE_0__["default"])(page, _partClass, pageParts[nextInd]);
     } // Нажатие на логотип
 
 
     logos.forEach(function (el) {
       el.addEventListener('click', function () {
-        Object(_showSlide__WEBPACK_IMPORTED_MODULE_1__["default"])(page, _partClass, pageParts[0]);
+        Object(_showSlide__WEBPACK_IMPORTED_MODULE_0__["default"])(page, _partClass, pageParts[0]);
       });
     });
   });
@@ -526,7 +526,7 @@ function mainSlider(_containerClass, _partClass) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _showSlide__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./showSlide */ "./src/js/modules/showSlide.js");
+/* harmony import */ var _showSlide__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./showSlide */ "./src/js/modules/showSlide.js");
 
 
 function modulesSlider(_containerClass, _partClass) {
@@ -556,7 +556,7 @@ function modulesSlider(_containerClass, _partClass) {
         }
       }
 
-      Object(_showSlide__WEBPACK_IMPORTED_MODULE_1__["default"])(page, _partClass, pageParts[nextInd]);
+      Object(_showSlide__WEBPACK_IMPORTED_MODULE_0__["default"])(page, _partClass, pageParts[nextInd]);
     }
 
     function isNavBtn(el) {
