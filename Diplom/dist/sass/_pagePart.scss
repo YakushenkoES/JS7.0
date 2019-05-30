@@ -1,9 +1,0 @@
-.page{
-    &-part{
-        opacity: 0.0;
-        transition: all ease-in-out 1s;
-    }
-    &-part-active{
-        opacity: 1.0;
-    }
-}
