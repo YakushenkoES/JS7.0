@@ -1,0 +1,8 @@
+.page-part {
+  opacity: 0.0;
+  -webkit-transition: all ease-in-out 1s;
+  -o-transition: all ease-in-out 1s;
+  transition: all ease-in-out 1s; }
+
+.page-part-active {
+  opacity: 1.0; }
